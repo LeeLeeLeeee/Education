@@ -56,43 +56,6 @@ show tables;
 ```
 
 
-
-# ROLLUP
-
-```
-
-# 그룹화 된 항목의 토탈을 까지 한 번에 출력할 때 사용
-# 그룹 네임에는 NULL이 출력 됨.
-
-SELECT
-    productLine,
-    SUM(orderValue) totalOrderValue
-FROM
-    sales
-GROUP BY
-    productline WITH ROLLUP;
-
-# GROUPING()함수
-## ROLLUP으로 그룹화된 행이면 1 아니면 0
-## IF(GROUPING(컬럼명), TURE겨우, FALSE 경우) 활용하여 컬럼 값 넣어줄 수 있음.
-
-SELECT
-    orderYear,
-    productLine,
-    SUM(orderValue) totalOrderValue,
-    GROUPING(orderYear), # 추가
-    GROUPING(productLine) # 추가
-FROM
-    sales
-GROUP BY
-    orderYear,
-    productline
-WITH ROLLUP;
-
-
-```
-
-
 # SELECT
 ### SELECT 구문의 7가지 대표 절
 ##### SELECT 컬럼,
@@ -128,7 +91,6 @@ WITH ROLLUP;
 #### OUTER JOIN
 #### INNER JOIN
 #### SELF JOIN
-#### threeway JOIN
 ```
 # OUTERJOIN[LEFT, RIGHT]
  SELECT * from [TABLE_A] as TA LEFT JOIN [TABLE_B] as TB on TA.col = TB.col;
@@ -142,7 +104,51 @@ SELECT * from [TABLE_A] as TA, [TABLE_B] as TB where TA.col = TB.col;
  * 각 인원의 ID가 있고 각 인원은 boss컬럼에 자신의 보스 ID가 있을 경우
  ** 셀프 조인을 이용하여 자신의 boss 네임을 가져오는 쿼리
  SELECT c.name AS child, p.name AS parent
- FROM [TABLE] as p,
+ FROM [TABLE] as p
  JOIN [TABLE] as c,
  on p.id = c.boss;
+
+# MULTI TABLE JOIN
+SELECT *
+FROM [TABLE_A] as TA
+JOIN [TABLE_B] as TB
+ON TA.col = TB.col
+JOIN [TABLE_C] as TC
+ON TB.col1 = TC.col1
+
+```
+
+# ROLLUP
+
+```
+
+# 그룹화 된 항목의 토탈을 까지 한 번에 출력할 때 사용
+# 그룹 네임에는 NULL이 출력 됨.
+
+SELECT
+    productLine,
+    SUM(orderValue) totalOrderValue
+FROM
+    sales
+GROUP BY
+    productline WITH ROLLUP;
+
+# GROUPING()함수
+## ROLLUP으로 그룹화된 행이면 1 아니면 0
+## IF(GROUPING(컬럼명), TURE겨우, FALSE 경우) 활용하여 컬럼 값 넣어줄 수 있음.
+
+SELECT
+    orderYear,
+    productLine,
+    SUM(orderValue) totalOrderValue,
+    GROUPING(orderYear), # 추가
+    GROUPING(productLine) # 추가
+FROM
+    sales
+GROUP BY
+    orderYear,
+    productline
+WITH ROLLUP;
+
+
 ```
