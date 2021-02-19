@@ -81,6 +81,7 @@ show tables;
 # IS NOT NULL, IS NULL, IN 모두 사용 가능
 # SELECT DISTINCT * from [TABLE명] -- 중복 행 제거
 # SELECT * from [TABLE] GROUP BY A HAVING A > 1000; -- MYSQL은 GROUP BY한 항목을 바로 정렬할 수 있다.
+# SELECT * from [TABLE] GROUP BY YEAR(DATE); -- 표현 식으로 행을 그룹화 할 수 있다.
 # SELECt * from [TABLE] Limit 5 -- 5개 한정
 # SELECt * from [TABLE] Limit 5, 4 -- 5번 row부터 4개까지
 
@@ -118,6 +119,9 @@ ON TB.col1 = TC.col1
 
 ```
 
+2일차 [02. 19]
+-----------------
+
 # ROLLUP
 
 ```
@@ -150,5 +154,167 @@ GROUP BY
     productline
 WITH ROLLUP;
 
+```
+
+# Subquery
 
 ```
+    # 다른 쿼리 내에 중첩 된 쿼리.
+    # 서브 쿼리는 해당 표현식이 사용되는 모든 곳에서 사용할 수 있으며 괄호로 묶어야 함.
+
+    ** 여러 행 비교
+    SELECT *
+    FROM [TABLE_A]
+    WHERE ID IN ( SELECT ID FROM [TABLE_B] )
+
+    ** 서브 쿼리가 단일 값을 리턴하면 비교 연산자를 사용할 수 있다.
+    SELECT *
+    FROM [TABLE_A]
+    WHERE ID = ( SELECT ID FROM [TABLE_B] LIMIT 1 )
+
+    ** EXISTS, NOT EXISTS 사용
+    --> error (
+                EXISTS는 MSSQL커서 처럼 한 ROW씩 비교를 하고 결과가 존재하면 1 없으면 0으로 판단한다.
+                즉 아래의 코드는 모두 결과가 존재하게 서브 쿼리가 있기 때문에 의도했던 B에있는 ID만 출력이 이루어지지 않는다.
+            )
+    SELECT *
+    FROM [TABLE_A]
+    WHERE ID EXISTS( SELECT ID FROM [TABLE_B] )
+
+    --> error fix
+    SELECT *
+    FROM [TABLE_A] as A
+    WHERE ID EXISTS( SELECT ID FROM [TABLE_B] as B WHERE A.ID = B.ID )
+
+    ** Inline View
+    *** 인라인 뷰, 혹은 파생 테이블이라고 하며 FROM 절에 사용되는 독립 서브 쿼리를 의미함. (별칭 필수)
+    SELECT *
+    FROM (
+        SELECT *
+        FROM [TABLE명]
+    ) AS INLINE_TABLE
+    WHERE INLINE_TABLE.col = 'AAA'
+```
+
+# Common Table Expressions [CTE]
+
+```
+    # CTE란 - SQL 실행 범위 내에서만 존재하는 캐쉬 테이블. 실행이 끝나면 사라짐.
+    ** 동일한 쿼리에서 여러 번 재귀하여 참조할 수 있다.
+
+    WITH [CTE_TABLE] AS (
+        SELECT *
+        FROM [TABLE_A]
+        WHER COL IN ('1', '2', '3')
+    )
+    SELECT * FROM [CTE_TABLE];
+
+```
+
+# UNION 
+
+```
+    ** 규칙 : FIELD 수와 순서는 동일해야함, 데이터 유형 동일하거나 호환 가능해야 함
+    SELECT FIELD1
+    FROM [TABLE_A]
+    UNION [DISTINCT | ALL] -- DISTINCT는 중복 행 제거이며 명시하지 않을 경우 Default값이다.
+    SELECT FIELD1
+    FROM [TABLE_B]
+
+```
+
+
+# INSERT
+
+```
+    1. INSERT INTO [TABLE] (FIELD1, FIELD2, ...)
+        VALUES(DATA1, DATA2, ...);
+    2. INSERT INTO [TABLE]
+        VALUES(DATA1, DATA2, ...);
+    ** 위의 경우 스키마와 같은 순서대로 필드 값이 자동 대입 됨.
+    -> 생략할 수 있는 필드 (NUll 허용, Default 설정, Auto_Increment 설정)
+    
+    ** 여러 ROW 한 번에 INSERT
+    INSERT INTO [TABLE] (FIELD1, FIELD2, ...)
+    VALUES
+    (VALUE1, VALUE2, ...),
+    (VALUE1, VALUE2, ...),
+    (VALUE1, VALUE2, ...),
+    (VALUE1, VALUE2, ...);
+
+```
+
+# UPDATE
+
+```
+    # 기본 업데이트
+    UPDATE [TABLE]
+    SET FIELD1 = DATA1, ....
+    WHERE FIELD_WHERE = VALUE1;
+
+    # 
+```
+
+# DELETE
+```
+   DELETE FROM [TABLE] WHERE FIELD = VALUE;
+
+   # ON DELETE CASCADE
+   ** 특정 행 삭제 시 다른 테이블에 영향이 있게 하는 거
+    CREATE TABLE TABLE_A ( 
+        num INT PRIMARY KEY AUTO_INCREMENT,
+        name varchar(255)
+    )
+
+    CREATE TABLE TABLE_B (
+        B_no INT PRIMARY KEY AUTO_INCREMENT,
+        name varchar(255),
+        num INT NOT NULL,
+        FOREIGN KEY (num)
+            REFERENCES TABLE_A (num)
+            ON DELETE CASCADE
+    )
+
+    ** 데이터 베이스에서 삭제 규칙이 연결된 테이블 검색
+    USE information_schema;
+
+    SELECT table_name
+    FROM referential_constraints
+    WHERE referenced_table_name = 'TABLE_A'
+    AND delete_rule = 'CASCADE';
+
+```
+
+# 트랜잭션
+
+```
+    # MySQL 트랜잭션을 사용하면 데이터베이스에 부분 작업의 결과가 포함되지 않도록 설정할 수 있다.
+      작업 집합의 일련의 작업에서 각각의 작업이 실패하면 롤백이 발생하여 원래상태로 복원 됨.
+      작업 집합이 모두 성공할 경우 데이터베이스에 커밋 됨.
+
+      START TRANSACTION -- 트랜잭션 시작
+      COMMIT -- 커밋하고 영구적으로 변경
+      ROLLBACK -- 트랜잭션 롤백하고 변경 사항 취소
+      SET autocommit -- 자동 커밋 모드 상태값 (1, 0 혹은 ON, OFF)
+      ** Savepoint를 사용하여 저장 지점을 만들 수 있음.
+
+      ** 사용 예시 첫 FIELD1은 'START'로 설정했다고 가정
+      SET AUTOCOMMIT = FALSE -- 자동 저장 종료
+      START TRANSATION; -- 트랜잭션 시작
+
+      UPDATE TABLE_A SET FIELD1 = 'A'
+      SAVEPOINT A; -- savepoint 지정 [추후 rollback으로 돌아갈 수 있게]
+
+      UPDATE TABLE_A SET FIELD1 = 'B'
+      SAVEPOINT B; -- savepoint 지정 [추후 rollback으로 돌아갈 수 있게]
+
+      UPDATE TABLE_A SET FIELD1 = 'C'
+      SAVEPOINT C; -- savepoint 지정 [추후 rollback으로 돌아갈 수 있게]
+
+      # COMMIT을 하면 FIELD1은                C
+      # ROLLABCK 하면 FIELD1은                START
+      # ROLLBACK TO SAVEPOINT B 하면 FIELD1은 B
+      *** COMMIT을 하고 나면 더이상 ROLLBACK을 할 수 없다.
+```
+
+# 데이터 타입
