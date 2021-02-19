@@ -252,7 +252,12 @@ WITH ROLLUP;
     SET FIELD1 = DATA1, ....
     WHERE FIELD_WHERE = VALUE1;
 
-    # 
+    # 조인 업데이트
+    UPDATE [TABLE_A] as A
+    JOIN [TABLE_B] as B
+    ON A.FIELD = B.FIELD
+    SET B.FIELD_NAME = A.FIELD_NAME
+    WHERE B.FIELD_CODE = LEFT(A.FIELD_CODE, 2)
 ```
 
 # DELETE
@@ -318,3 +323,16 @@ WITH ROLLUP;
 ```
 
 # 데이터 타입
+
+```
+    # CHAR와 VARCHAR
+    ** CHAR(고정 길이), VARCHAR(가변 길이)
+
+    # TEXT 타입
+    ** 1바이트 ~ 4 GB까지 텍스트 문자열을 저장하는데 유용하지만 느림.
+
+    # CAST, CONVERT
+    ** 데이터 자료형을 변경하는 함수
+    *** CONVERT( EXPRESSION, 데이터 형식[길이])
+    *** CAST( EXPRESSION AS 데이터 형식[길이])
+```
