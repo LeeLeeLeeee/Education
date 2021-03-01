@@ -4,8 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
 
-import ClassOne from './Hook/class_1'
-import Classtwo from './Hook/class_2'
+import ClassOne from './Class/class_1'
+import Classtwo from './Class/class_2'
+import ClassThree from './Class/class_3';
 
 const Home = () => <p>React Edu Page</p>
 
@@ -26,7 +27,10 @@ function App() {
                   <Link to="/HOOK/2">Hook-Class-Two</Link><br />
                   <small> * UseMemo, UseCallBack, UseRef  </small>
                 </li>
-                <li class="list-group-item list-group-item-action">Morbi leo risus</li>
+                <li class="list-group-item list-group-item-action">
+                  <Link to="/DOM">react-router-dom-Class-One</Link><br />
+                  <small> * Hook  </small>
+                  </li>
                 <li class="list-group-item list-group-item-action">Porta ac consectetur ac</li>
                 <li class="list-group-item list-group-item-action">Vestibulum at eros</li>
               </ul>
@@ -36,6 +40,7 @@ function App() {
                 <Route exact path="/" component={Home}></Route>
                 <Route exact path="/HOOK/1" component={ClassOne}></Route>
                 <Route exact path="/HOOK/2" component={Classtwo}></Route>
+                <Route exact path="/DOM" component={ClassThree}></Route>
               </Switch>      
             </div>
           </div>

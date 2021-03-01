@@ -17,6 +17,11 @@ html, body, #root {
   border-radius: .5rem;
 }
 
+.content .code pre {
+  color:white;
+}
+
+
 .highlight {
   color: yellowgreen
 }
