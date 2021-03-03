@@ -28,6 +28,37 @@ const AboutUseEffect = () => {
     );
 }
 
+const AboutUseContext = () => {
+    return (
+        <div className={'bd-callout bd-callout-info'}>
+            <p className={'text-primary h3'}> * useContext 란?</p>
+            <p className={"content"}>
+                우선 React에서 Context라는 개념은 상위 컴포넌트의 데이터 집합을 하위 컴포넌트에서 사용하기 위함이다. 사용은 아래와 같이한다.
+                <span className="code d-block m-1"> {`
+                import React, { createContext } from 'react'
+                // AppContext 생성
+                const AppContext = createContext();
+                const dataSet = {'name':'younghyun','gender':'man'}'
+                <AppContext.Provider value={dataSet}>
+                    <App>
+                </AppContext.Provider>
+
+                // 하위 컴포넌트에서 사용하려면 생성했던 Context로 감싸줘야한다.
+                <AppContext.Consumer>
+                    {...}
+                </AppContext.Consumer>
+                `} </span>
+                위와 같이 사용하면 하위 컴포넌트에서 <span className="code">dataSet</span>에 접근할 수 있다.
+                <br />
+                하지만 Context를 많이 사용하게되면 컴포넌트의 가독성이 떨어진다. 이 때 <span className="code">useContext</span>를 사용해주면
+                좀더 코드를 직관적으로 작성할 수 있다. <span className="code"> {`const dataSet = useContext(AppContext)`} </span>
+                <br />
+
+            </p>
+        </div>
+    );
+}
+
 const ExampleUse = ({ num, setNum }) => {
     return (
         <div className={'bd-callout bd-callout-info'}>
@@ -77,6 +108,7 @@ export default function ClassOne(props){
             <AboutUseState num={num}/>
             <AboutUseEffect />
             <ExampleUse num={num} setNum={setNum} />
+            <AboutUseContext />
         </>
     )
     
