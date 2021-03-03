@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
 import ClassOne from './Class/class_1'
 import Classtwo from './Class/class_2'
 import ClassThree from './Class/class_3';
+import ClassFour from './Class/class_4';
 
 const Home = () => <p>React Edu Page</p>
 
@@ -28,10 +29,13 @@ function App() {
                   <small> * UseMemo, UseCallBack, UseRef  </small>
                 </li>
                 <li class="list-group-item list-group-item-action">
-                  <Link to="/DOM">react-router-dom-Class-One</Link><br />
+                  <Link to="/DOM/1">react-router-dom-Class-One</Link><br />
                   <small> * Hook  </small>
                   </li>
-                <li class="list-group-item list-group-item-action">Porta ac consectetur ac</li>
+                  <li class="list-group-item list-group-item-action">
+                  <Link to="/DOM/2">react-router-dom-Class-Two</Link><br />
+                  <small> * Component, attribute  </small>
+                  </li>
                 <li class="list-group-item list-group-item-action">Vestibulum at eros</li>
               </ul>
             </div>
@@ -40,7 +44,8 @@ function App() {
                 <Route exact path="/" component={Home}></Route>
                 <Route exact path="/HOOK/1" component={ClassOne}></Route>
                 <Route exact path="/HOOK/2" component={Classtwo}></Route>
-                <Route exact path="/DOM" component={ClassThree}></Route>
+                <Route exact path="/DOM/1" component={ClassThree}></Route>
+                <Route exact path="/DOM/2" component={ClassFour}></Route>
               </Switch>      
             </div>
           </div>
