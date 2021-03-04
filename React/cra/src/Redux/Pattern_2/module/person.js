@@ -1,81 +1,43 @@
-import { createAction } from 'redux-actions'
+import { createAction } from 'redux-actions';
+import clonedeep from 'lodash.clonedeep';
 
-export const ADD_TODO = 'ADD_TODO'
-export const DELETE_TODO = 'DELETE_TODO'
-export const TOGGLE_TODO = 'TOGGLE_TODO'
+export const ADD_PERSON = 'PERSON/ADD_PERSON'
+export const DELETE_PERSON = 'PERSON/DELETE_PERSON'
+
+export const addPerson = createAction(ADD_PERSON, name => name)
+export const deletePerson = createAction(DELETE_PERSON, name => name)
+
+
+const initialState = [];
 
 /* 
-    createAction은 Action생성을 단순화 해주는 함수이다.
-    -- parameter 없을 때.
-    * before
-    export const example = () => ({
-        type: EXAMPLE
-    });
-    * after 
-    export const example = createAction(EXAMPLE);
-
-    -- parameter 있을 때.
-
-    * before
-    export const example = (param) => ({
-        type: EXAMPLE,
-        payload: param
-    });
-    * after 
-    export const example = createAction(EXAMPLE, param => param);
-
-*/
-export const addTodo = createAction(ADD_TODO, todo => todo)
-
-
-const initialState = {
-    allIds: [],
-    byPerson: {
-
-    },
-    byIds: {
-
-    }
+return {
+        ...state,
+        allIds: [
+            ...state.allIds, 
+            param.id
+        ],
+        byPerson: {
+            ...state.byPerson,
+            [param.person]: state.byPerson[param.person] // 등록된 사람이 있다면.
+                ? state.byPerson[param.person].concat([param])
+                : [param]
+        },
+        byIds: {
+            ...state.byIds,
+            [param.id]: param
+        }
 };
+*/
 
 export default function(state = initialState, action){
-    const param = action.payload || false;
+    const { name } = action.payload || { name : false };
     switch(action.type){
-        case ADD_TODO:
-            if(!!param.person){
-                param.completed = false;
-                return {
-                    ...state,
-                    allIds: [
-                        ...allIds, 
-                        param.id
-                    ],
-                    byPerson: {
-                        ...state.byPerson,
-                        [param.person]: state.byPerson[param.person] // 등록된 사람이 있다면.
-                            ? state.byPerson[param.person].concat([param])
-                            : [param]
-                    },
-                    byIds: {
-                        ...state.byIds,
-                        [param.id]: param
-                    }
-                };
-            }else{
-                alert('사용자 먼저 선택해주세요.');
-                return state;
-            };
-        case DELETE_TODO:
-            return {
-                ...state,
-                allIds: state.allIds.filter(todo=> todo.id !== param.id),
-                byPerson: {
-                    ...byPerson,
-                    [param.person]: state.byPerson.filter(todo=> todo.id !== param.id)
-                }
-            }
-
-        case TOGGLE_TODO:
-
+        case ADD_PERSON:
+            return [...state, name]
+        case DELETE_PERSON:         
+            return state.filter( sname => sname !== name );
+        default:
+            return state;
     }
 }
