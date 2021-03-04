@@ -74,7 +74,7 @@ const ExampleUseMemo = ({setTxt, setNum }) => {
     );
 }
 
-const ExampleUseCallback = ({onChangeHandler, setTxt2, onChangeHandlerTxt2}) => {
+const ExampleUseCallback = ({onChangeHandler, setTxt2, onChangeHandlerTxt2, onChangeHandlerTxt3}) => {
     return (
         <div className={'bd-callout bd-callout-info'}>
             <p className={'text-primary h3'}> * 사용 예제 - useCallback </p>
@@ -102,7 +102,8 @@ const ExampleUseCallback = ({onChangeHandler, setTxt2, onChangeHandlerTxt2}) => 
                         TEXT2 : <input type="text" onChange={(e)=> setTxt2(e.target.value)} />
                     </label>
                     <button type="button" className={"btn btn-sm btn-primary mr-2"} onClick={onChangeHandler}>TEXT2(두 번째 인자 없음)</button>
-                    <button type="button" className={"btn btn-sm btn-primary"} onClick={onChangeHandlerTxt2}>TEXT2(두 번쨰 인자 있음)</button>
+                    <button type="button" className={"btn btn-sm btn-primary mr-2"} onClick={onChangeHandlerTxt2}>TEXT2(두 번쨰 인자 있음)</button>
+                    <button type="button" className={"btn btn-sm btn-primary"} onClick={onChangeHandlerTxt3}>useCallback 아님</button>
                 </div>
                 
             </p>
@@ -171,8 +172,14 @@ export default function ClassTwo(props){
 
     const onChangeHandlerTxt2 = useCallback(e=> {
         // 이것은 이벤트 핸들러 용, txt2가 변경될 때 마다 생성되며, txt2를 넣어야 최신 txt2를 보장할 수 있음.
+        // txt2가 변경되어야 함수를 생성
         alert(txt2)
     },[txt2])
+
+    const onChangeHandlerTxt3 = e => {
+        // 컴포넌트가 렌더 될 때마다 함수 재 호출.
+        alert(txt2)
+    }
 
     /* for - useRef */
 
@@ -186,7 +193,6 @@ export default function ClassTwo(props){
         setTxt3(e.target.value);
     }
     
-
     return (
         <>
             <AboutUseMemo />
@@ -196,7 +202,7 @@ export default function ClassTwo(props){
                 momeFunc : {memoFunc}
             </div>
             <AboutUseCallback />
-            <ExampleUseCallback onChangeHandler={onChangeHandler} setTxt2={setTxt2} onChangeHandlerTxt2={onChangeHandlerTxt2} />
+            <ExampleUseCallback onChangeHandler={onChangeHandler} setTxt2={setTxt2} onChangeHandlerTxt2={onChangeHandlerTxt2} onChangeHandlerTxt3={onChangeHandlerTxt3} />
             <AboutUseRef />
             <ExampleUseRef test_value={test_value} test_ref={test_ref.current} refHandler={refHandler} />
 

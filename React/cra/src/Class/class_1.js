@@ -34,7 +34,7 @@ const AboutUseContext = () => {
             <p className={'text-primary h3'}> * useContext 란?</p>
             <p className={"content"}>
                 우선 React에서 Context라는 개념은 상위 컴포넌트의 데이터 집합을 하위 컴포넌트에서 사용하기 위함이다. 사용은 아래와 같이한다.
-                <span className="code d-block m-1"> {`
+                <span className="code d-block m-1"><pre>{`
                 import React, { createContext } from 'react'
                 // AppContext 생성
                 const AppContext = createContext();
@@ -47,7 +47,7 @@ const AboutUseContext = () => {
                 <AppContext.Consumer>
                     {...}
                 </AppContext.Consumer>
-                `} </span>
+                `}</pre></span>
                 위와 같이 사용하면 하위 컴포넌트에서 <span className="code">dataSet</span>에 접근할 수 있다.
                 <br />
                 하지만 Context를 많이 사용하게되면 컴포넌트의 가독성이 떨어진다. 이 때 <span className="code">useContext</span>를 사용해주면

@@ -9,10 +9,13 @@
 
 
 ### react-redux 
-**Redux 폴더의 Pattern1, 2를 참고하도록 하자.**
+**Redux 폴더의 Pattern 폴더를 참고하도록 하자.**
+1. [Pattern-1. Redux 기본 패턴](./src/Redux/Pattern_1)
+2. Pattern-2. Ducks 패턴
+3. Pattern-3. Redux-toolkit을 이용한 패턴
 
 ### Redux 키워드 숙지
-[Redux 키워드 사이트](https://redux.js.org/tutorials/essentials/part-1-overview-concepts#terminology,"Redux keyWord")
+[Redux 키워드 사이트](https://redux.js.org/tutorials/essentials/part-1-overview-concepts#terminology)
 
 #### 액션 (Action)
 
@@ -62,14 +65,23 @@ Store는 Reducer로 전달해서 `action.type`에 맞는 로직을 처리 해줌
 구독 또한 Store의 내장함수 중 하나이며 함수 형태의 값을 파라미터로 받아옴.
 Action이 Dispatch 되었을 때 마다 전달해준 함수가 호출됨.
 - - -
+
+### 커넥트 (Connect)
+
+Store의 내장함수로 mapStateToProps, mapDispatchToProps를 인자로 받아 호출하면 Wrapper Container를 인자로 받는 함수를 반환한다.   
+해당 함수는 각각 State, Dispatch를 Wrapper Container로 넘어온 Component에 주입해준다.
+
 ### Redux의 3가지 Rule
 
 #### 1. 하나의 App에 하나의 Store만 존재함.
+
 여러 Store를 생성할 수 있으나 좋지 않은 방법임.   
 Store를 여러개로 나누어야 하는 경우 CombineReducers를 사용하여 Store를 합치도록 하자.
 #### 2. 상태는 읽기전용
+
 원본을 건드리지 않고 수정을 해야함. `Immutable.js` 라이브러리 혹은 `스프레드 연산자`등 새로운 객체를 반환 하는 함수를 사용하여 작업해야함.
 #### 3. 순수 함수만
+
 Reducer함수가 받아온 state는 건들지 않고 새로운 state를 반환하고.   
 똑같은 인자를 받은 함수는 늘 같은 결과값을 반환해야함.
 - - -
