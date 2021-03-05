@@ -11,9 +11,8 @@ export const getTodoById = (store, id) =>
 export const getTodos = store =>
     getTodoList(store).map(id=> getTodoById(store, id));
 
-
-export const nameFilter = (todos, name) =>
-    name === '' ? todos : todos.filter(todo => todo.name === name );
+export const getTodoByName = (store, name) =>
+    getTodoState(store) ? ([...getTodoState(store).byPerson[name]] || []) : [];
 
 export const getTodosByFilter = (store, typeFilter, nameFilter = '' ) => {
     const allTodos = getTodos(store);
@@ -23,6 +22,7 @@ export const getTodosByFilter = (store, typeFilter, nameFilter = '' ) => {
         case typeInterface.INCOMPLETE:
             return nameFilter(allTodos, nameFilter).filter(todo => !todo.completed);
         case typeInterface.ALL:
-            return allTodos;
+            return nameFilter(allTodos, nameFilter);
     }   
 }
+

@@ -1,5 +1,4 @@
 import { createAction } from 'redux-actions';
-import clonedeep from 'lodash.clonedeep';
 
 export const ADD_PERSON = 'PERSON/ADD_PERSON'
 export const DELETE_PERSON = 'PERSON/DELETE_PERSON'
