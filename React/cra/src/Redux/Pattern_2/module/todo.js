@@ -30,13 +30,15 @@ export const DELETE_PERSON  = 'TODO/DELETE_PERSON'
 export const addTodo = createAction(ADD_TODO, param => param);
 export const deleteTodo = createAction(DELETE_TODO, param => param);
 export const toggleTodo = createAction(TOGGLE_TODO, param => param);
-export const deletePerson = createAction(DELETE_PERSON, param => param);
+export const deleteTodoPerson = createAction(DELETE_PERSON, param => param);
 
 const initialState = {
     allIds: [],
     byPerson: {},
     byIds: {}
 };
+
+let nextTodoId = 0
 
 /* 
 return {
@@ -59,10 +61,12 @@ return {
 */
 
 export default function(state = initialState, action){
-    const { param } = action.payload || { param: false };
+    const param = action.payload || {};
     let newState = '';
+    let targetPerson = '';
     switch(action.type){
         case ADD_TODO:
+            param.id = (++nextTodoId);
             if(!!param.person){
                 param.completed = false;
                 newState = clonedeep(state);
@@ -79,31 +83,38 @@ export default function(state = initialState, action){
 
         case DELETE_TODO:            
             newState = clonedeep(state);
-            newState.allIds = newState.allIds.filter(todo=> todo)
-            let targetPerson = newState.byPerson[newState.byIds[param.id].person];
-            targetPerson = targetPerson.filter(todo => todo.id !== param.id );
-            delete newState.byIds[param.id]
+            newState.allIds = newState.allIds.filter(id=> id !== +param);
+            newState.byPerson[newState.byIds[param].person] = 
+            newState.byPerson[newState.byIds[param].person]
+            .filter(todo => todo.id !== +param );
+
+            delete newState.byIds[param]
             return newState;
 
         case TOGGLE_TODO:
             newState = clonedeep(state);
-            let targetPerson = newState.byPerson[newState.byIds[param.id].person];
-            targetPerson.some((cur, id, arr)=> {
-                if(cur.id === param.id) {
-                    arr[id].completed = !cur.completed;
-                    return true;
+
+            newState.byPerson[newState.byIds[param].person] = 
+            newState.byPerson[newState.byIds[param].person]
+            .map((item)=> {
+                if(item === param) {
+                    item.completed = !item.completed;
+                    return item;
                 }
+                return item
             });
-            newState.byIds[param.id].completed = !newState.byIds[param.id].completed
+            newState.byIds[param].completed = !newState.byIds[param].completed;
+            return newState;
         case DELETE_PERSON:
             newState = clonedeep(state);
-            newState.byPerson[param.name].map(todo=>{
+            newState.byPerson[param].forEach(todo=>{
                 delete newState.byIds[todo.id];
                 newState.allIds.splice(
                     newState.allIds.indexOf(todo.id),
                     1
-                )
+                );
             });
+            delete newState.byPerson[param];
             return newState;
         default:
             return state;

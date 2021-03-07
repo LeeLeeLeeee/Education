@@ -9,6 +9,7 @@ import Classtwo from "./Class/class_2";
 import ClassThree from "./Class/class_3";
 import ClassFour from "./Class/class_4";
 import RedexOne from "./Redux/Pattern_1";
+import ReduxTwo from "./Redux/Pattern_2";
 
 const Home = () => <p>React Edu Page</p>;
 
@@ -42,7 +43,10 @@ function App() {
                   <small> * Component, attribute </small>
                 </li>
                 <li class="list-group-item list-group-item-action">
-                  <Link to="/REDUX/1">Redux</Link>
+                  <Link to="/REDUX/1">Redux-1</Link>
+                </li>
+                <li class="list-group-item list-group-item-action">
+                  <Link to="/REDUX/2">Redux-2</Link>
                 </li>
               </ul>
             </div>
@@ -54,6 +58,7 @@ function App() {
                 <Route exact path="/DOM/1" component={ClassThree}></Route>
                 <Route exact path="/DOM/2" component={ClassFour}></Route>
                 <Route exact path="/REDUX/1" component={RedexOne}></Route>
+                <Route exact path="/REDUX/2" component={ReduxTwo}></Route>
               </Switch>
             </div>
           </div>

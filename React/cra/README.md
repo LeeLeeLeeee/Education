@@ -11,7 +11,7 @@
 ### react-redux 
 **Redux 폴더의 Pattern 폴더를 참고하도록 하자.**
 1. [Pattern-1. Redux 기본 패턴](./src/Redux/Pattern_1)
-2. Pattern-2. Ducks 패턴
+2. [Pattern-2. Ducks 패턴](./src/Redux/Pattern_2)
 3. Pattern-3. Redux-toolkit을 이용한 패턴
 
 ### Redux 키워드 숙지

@@ -1,29 +1,29 @@
 import { createAction } from 'redux-actions';
 
 export const SET_TYPE = 'FILTER/SET_TYPE';
-export const SET_NAME = 'FILTER/SET_NAME';
+export const SET_PERSON = 'FILTER/SET_NAME';
 
-export const setType = createAction(SET_TYPE, type => type );
-export const setName = createAction(SET_NAME, name => name );
+export const setType = createAction(SET_TYPE, todoType => todoType );
+export const setPerson = createAction(SET_PERSON, person => person );
 
 const initialState = {
-    type: 'all',
-    name: ''
+    todoType: 'all',
+    personType: ''
 };
 
 export default function(state = initialState, action){
     switch(action.type){
-        case SET_FILTER:
-            const { type } = action.payload;
+        case SET_TYPE:
+            const todoType = action.payload;
             return {
                 ...state,
-                type
+                todoType
             };
-        case SET_NAME:
-            const { name } = action.payload;
+        case SET_PERSON:
+            const personType = action.payload;
             return {
                 ...state,
-                name
+                personType
             };
         default:
             return state;
