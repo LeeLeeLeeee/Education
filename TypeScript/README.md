@@ -94,4 +94,7 @@ import, export
 ```
 
 ## Chapter
-[1.환경 구성](./Chapter1)
+[1.환경 구성](./Chapter1)  
+[2.객체와 타입](./Chapter2)  
+[3.함수와 메서드](./Chapter3)  
+[4.배열과 튜플](./Chapter4)  
