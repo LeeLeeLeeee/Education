@@ -2,7 +2,7 @@
 
 [메인 화면으로](../)
 
-**환경 설치 순서**
+**환경 설치 순서**  
 1. nodejs 설치
 2. vscode 설치
 3. typescript 설치
@@ -35,7 +35,7 @@ ts-node -v
         }
     }
 ```
-**tsconfig Option**
+**tsconfig Option** 
 ```bash
     
     modude # 프로젝트가 구동될 플랫폼이 웹 브라우저인지, Node인지 구분해 그에 맞는 모듈 방식을 설정

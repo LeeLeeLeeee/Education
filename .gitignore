@@ -3,3 +3,4 @@
 
 #TypeScript 프로젝트 하위 nodemodules 모두 ignore.
 /TypeScript/**/node_modules
+/TypeScript/Sample

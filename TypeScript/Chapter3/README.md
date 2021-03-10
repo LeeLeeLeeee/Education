@@ -3,13 +3,13 @@
 [메인 화면으로](../)
 
 ### 함수 선언문
-**기본 함수 선언**
+**기본 함수 선언**  
 ```javascript
     function 함수이름(매개변수: 타입, 매개변수: 타입) : 반환 타입{
         /* content */
     }
 ```
-**함수 시그니처**
+**함수 시그니처**  
 ```javascript
     /* 기본 구조 */
     (매개변수 타입[,...]) => 반환 타입
@@ -19,7 +19,7 @@
     /* 시그니처 사용 ○ */
     let printMe: (string, number) => void  = function(name: string, age: number): void {}
 ```
-**type 키워드로 타입 별칭 작성**
+**type 키워드로 타입 별칭 작성**  
 ```javascript
     /* 기본 구조 */
     type 새로운 타입 = 기존 타입
@@ -27,7 +27,7 @@
     type stringNumberFunc = (string, number) => void;
     let f: stringNumberFunc = function(a: string, b: number) : void {}
 ```
-**undefined 관련 주의 사항**
+**undefined 관련 주의 사항**  
 undefined는 하나의 타입으로 모든 타입의 최하위에 존재함  
 따라서 undefined를 호출해도 상위 타입을 상속받는다고 간주하며 오류가 발생하지 않음.
 이런 오류를 방지하기 위해 undefined인지를 판별하는 코드가 추가되어야 함.
@@ -47,7 +47,7 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
     function getName(o: INameable) { return o === undefined ? 'unknown' : o.name }
     let n_fix = getName(undefined)
 ```
-**선택적 매개변수**
+**선택적 매개변수**  
 ```javascript
     /* 기본구조 */
     function fn(arg1? : string) : void {}
@@ -57,23 +57,23 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
 
 ### 함수 표현식
 함수는 객체이다. 따라서 함수는 하나의 인스턴스로서 변수에 할당할 수있다.
-**함수 표현식**
+**함수 표현식**  
 ```javascript
     const Add = function(a: number, b: number) : number { return a + b };
     Add(1, 2) // 3
 ```
 
-**일등 함수란?**
+**일등 함수란?**  
 함수와 변수를 구분하지 않는다는 의미이다.  
 일등 함수 기능을 제공하면 `함수형 프로그래밍 언어`라고 한다.
 
-**계산법**
+**계산법**  
 컴파일러는 표현식을 만나면 계산법을 적용한다.  
 계산법에는 두가지 방법이 있으며 `eager evaluation(조급한 계산)`, `lazy evaluation(느긋한 계산)`로 구분할 수 있다.  
 컴파일 중 `1 + 2`를 만나면 `eager evaluation`로 적용하고 `function(a, b){return a + b}`를 만나면  
 `lazy evaluation`를 적용하여 우선 계산을 보류한다.
 
-**익명 함수**
+**익명 함수**  
 ```javascript
     /* 
         함수를 감싸주는 이유는 연산자 우선 순위를 먼저 진행하기 위함이다. 
@@ -83,7 +83,7 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
 ```
 ### 화살표 함수와 표현식 문
 
-**기본 구조**
+**기본 구조**  
 ```javascript
     /* 기본 구조 */
     const 함수이름 = (매개변수: 타입[,...]) : 반환타입 => 함수몸통
@@ -92,7 +92,7 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
     const arrow2 = (a: number, b: number): number => a + b //표현식 문 방식 몸통
 ```
 
-**실행문과 표현식 문**
+**실행문과 표현식 문**  
 실행문은 CPU에서 실행되는 코드이며 `return`을 해야만 결과를 알려주는 구문이다.  
 표현식 문은 굳이 `return`을 하지 않아도 결과를 알려주는 구문이다.
 표현식 문은 변수에 할당받을 수 있는 코드 단위이기도 하다.
@@ -107,12 +107,12 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
     if(x > y) // 깔끔한 표현식 코드..
 ```
 
-**실행문을 만드는 세미콜론**
+**실행문을 만드는 세미콜론**  
 타입스크립트에서는 관습적으로 표현식 문에는 세미콜론을 붙이지 않습니다.
 
 ### 일등 함수
 
-**콜백 함수**
+**콜백 함수**  
 매개변수 형태로 동작하는 함수를 `콜백 함수`라고 함.
 ```javascript
     /* exmple */
@@ -121,7 +121,7 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
     };
     init(()=> console.log('----'));
 ```
-**중첩 함수**
+**중첩 함수**  
 함수 안에 함수를 중첩해서 구현
 ```javascript
     //calc함수는 add, multiply라는 이름의 중첩 함수를 구현하고 있음.
@@ -137,7 +137,7 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
 
 ### 고차 함수와 클로저 & 부분함수
 
-**고차 함수**
+**고차 함수**  
 선언된 함수가 또 다른 함수를 반환하는 함수
 ```javascript
     const add1 = (a: number, b: number): number => a + b // 보통 함수
@@ -154,7 +154,7 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
         }
     }
 ```
-**부분 함수**
+**부분 함수**  
 고차 함수가 완벽하게 끝나지 않은 상태를 부분 함수라고 한다.
 ```javascript
     const multiple = a => b => c => a * b * c
@@ -164,12 +164,12 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
 
 ### 함수 구현 기법
 
-**매개변수 기본값**
+**매개변수 기본값**  
 ```javascript
     (매개변수: 타입 [= 매개변수 기본값])
 ```
 
-**객체를 반환하는 화살표함수**
+**객체를 반환하는 화살표함수**  
 ```javascript
     /* 복합 실행 구문 함수로 판단하여 객체가 반환되지 않음 */
     const makePerson(name: string, age: number =10): {name: string, age: number} => {name, age}
@@ -177,7 +177,7 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
     const makePerson(name: string, age: number =10): {name: string, age: number} => ({name, age})    
 ```
 
-**매개변수에 비구조화 할당**
+**매개변수에 비구조화 할당**  
 ```javascript
     type Person = {
         name: string,
@@ -186,7 +186,7 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
     const printPerson = ({name, age}: Person): void => console.log(`name : ${name}, age : ${age}`)
     printPerson({name:'Jack', age: 23});
 ```
-**색인 키와 값으로 객체 만들기**
+**색인 키와 값으로 객체 만들기**  
 ```javascript
     /* 색인 기능 타입 지정하기 */
     type KeyType = {
@@ -198,7 +198,7 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
 
 ### 클래스 메서드
 
-**function 함수와 this**
+**function 함수와 this**  
 function 함수는 this키워드를 사용할 수 있다.  
 Arrow Function는 this를 사용할 수 없다.  
 여기서 사용할 수 있다 없다의 의미는 `this`를 바인딩 할 수 있느냐 없느냐의 차이다.  
@@ -212,7 +212,7 @@ function으로 생성된 함수는 동적으로 작동하기 때문에 `bind, ap
     Fnb.call(obj) // window객체
 ```
 
-**기본 메서드**
+**기본 메서드**  
 ```javascript
     export class A {
         constructor(public value: number =1 ){}
@@ -229,7 +229,7 @@ function으로 생성된 함수는 동적으로 작동하기 때문에 `bind, ap
     let a : A = new A(2);
     a.method() // value : 2
 ```
-**정적 메서드**
+**정적 메서드**  
 ```javascript
     export class A {
         static method(): string {
@@ -240,7 +240,7 @@ function으로 생성된 함수는 동적으로 작동하기 때문에 `bind, ap
     A.method() // I'm Class A
 ```
 
-**메서드 체인**
+**메서드 체인**  
 메서드를 이어서 계속 호출하는 방식
 ```javascript
     export class Calculator {

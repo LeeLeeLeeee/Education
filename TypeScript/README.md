@@ -1,5 +1,9 @@
 # TYPESCRIPT 📜
 
+## Typescript 참고 및 실행 사이트
+[🏷 코드 예제](https://drive.google.com/file/d/11zwjfjmZCWeBhirOJj7OG6ns7BMzw5Ni/view)
+[코드 테스트](https://www.typescriptlang.org/play?#code/Q)
+
 ## Typescript란?
 간단하게 말하면 `Javascript`의 타입이 추가된 확장 버전이다.
 
@@ -98,3 +102,5 @@ import, export
 [2.객체와 타입](./Chapter2)  
 [3.함수와 메서드](./Chapter3)  
 [4.배열과 튜플](./Chapter4)  
+[5.반복기와 생성기](./Chapter5)  
+[6.비동기 API](./Chapter5)  

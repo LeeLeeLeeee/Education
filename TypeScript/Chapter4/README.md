@@ -4,7 +4,7 @@
 
 
 ### 배열 이해
-**for - in**
+**for - in**  
 객체를 대상으로 사용, 배열도 객체이기 때문에 가능  
 객체는 key, 배열은 index를 반환함.
 ```javascript
@@ -18,14 +18,14 @@
     }
 ```
 
-**for - of**
+**for - of**  
 `Iterator`타입만 가능 아이템 값을 직접 순회함.
 ```javascript
     for(const item in arr){
         console.log(item) // 3, 2, 1
     }
 ```
-**제네릭 방식 타입**
+**제네릭 방식 타입**  
 타입을 변수로 취급하는 것을 `제네릭 타입`이라고 함.
 ```javascript
     const arrayLength = (array: T[]): number => array.length
@@ -38,7 +38,7 @@
     arrayLength(numArr) // 3 
     arrayLength(strArr) // 3
 ```
-**제네릭 함수 타입 추론**
+**제네릭 함수 타입 추론**  
 ```javascript
     /* 기본 구조 */
     함수이름<T>(매개변수)
@@ -48,7 +48,7 @@
     identty(true) //true
 ```
 
-**제네릭 함수와 함수 시그니처 오류**
+**제네릭 함수와 함수 시그니처 오류**  
 ```javascript
     const normal = (cb : (number) => number): void => {}
     const error = (cb : (number, number?) => number): void => {} //error 발생
@@ -62,7 +62,7 @@
 
 ### 선언형 프로그래밍과 배열
 
-**선언형 프로그래밍 vs 명령형 프로그래밍**
+**선언형 프로그래밍 vs 명령형 프로그래밍**  
 
 명령형 프로그래밍
 ```javascript
@@ -87,21 +87,21 @@ arr.map().filter().map()....
 
 ### Map, Filer, Reduce
 
-**Map**
+**Map**  
 새로운 배열 반환
 ```javascript
     let arr = [1,2,3];
     let arr_2 = arr.map(item=>item+1);
     arr_2 // [2,3,4]
 ```
-**Filter**
+**Filter**  
 배열 필터링
 ```javascript
     let arr = [1,2,3];
     let arr_2 = arr.filter(item=> item % 2 === 1);
     arr_2 // [1, 3]
 ```
-**Reduce**
+**Reduce**  
 배열 순회하며 리턴 값 반환
 ```javascript
     let arr = [1,2,3];
@@ -122,7 +122,7 @@ arr.map().filter().map()....
 
 ### 순수 함수와 배열
 
-**순수 함수란**
+**순수 함수란**  
 함수형 프로그래밍에서 함수는 `순수 함수`라는 조건을 만족해야 함.  
 
 ```javascript
@@ -145,14 +145,14 @@ function(a, b){
     return a + b + c
 }
 ```
-**reaonly**
+**reaonly**  
 순수함수 구현을 쉽게 하도록 `readonly`키워드를 제공함
 ```javascript
     function forcePure(arr: readonnly number[]){
         arr.push(1) // error
     }
 ```
-**가변 인수 함수와 순수 함수**
+**가변 인수 함수와 순수 함수**  
 함수를 호출할 때 전달하는 인수의 개수를 제한하지 않는 것을 `가변 인수`라고 합니다.
 ```javascript
     /* 매개변수로 넘어온 배열을 합치는 순수 함수 mergeArray를 작성해보자. */
@@ -173,7 +173,7 @@ function(a, b){
 
     const StringArray: string[] = mergeArray( ['Happy'], ['Sad'] ) // ['Happy', 'Sad']
 ```
-**튜플**
+**튜플**  
 `javascript`에는 튜플의 개념이 없으며 단순히 여러 타입에 대응하는 배열 정도로 사용한다.
 ```javascript
     const tuple [boolean, string] = [true, 'the result OK!']
