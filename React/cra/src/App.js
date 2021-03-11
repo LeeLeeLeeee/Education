@@ -10,6 +10,7 @@ import ClassThree from "./Class/class_3";
 import ClassFour from "./Class/class_4";
 import RedexOne from "./Redux/Pattern_1";
 import ReduxTwo from "./Redux/Pattern_2";
+import ReduxThree from "./Redux/Pattern_3"
 
 const Home = () => <p>React Edu Page</p>;
 
@@ -48,6 +49,9 @@ function App() {
                 <li class="list-group-item list-group-item-action">
                   <Link to="/REDUX/2">Redux-2</Link>
                 </li>
+                <li class="list-group-item list-group-item-action">
+                  <Link to="/REDUX/3">Redux-3</Link>
+                </li>
               </ul>
             </div>
             <div className={"p-1 w-100 m-1 overflow-auto h-100"}>
@@ -59,6 +63,7 @@ function App() {
                 <Route exact path="/DOM/2" component={ClassFour}></Route>
                 <Route exact path="/REDUX/1" component={RedexOne}></Route>
                 <Route exact path="/REDUX/2" component={ReduxTwo}></Route>
+                <Route exact path="/REDUX/3" component={ReduxThree}></Route>
               </Switch>
             </div>
           </div>

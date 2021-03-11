@@ -63,7 +63,6 @@ return {
 export default function(state = initialState, action){
     const param = action.payload || {};
     let newState = '';
-    let targetPerson = '';
     switch(action.type){
         case ADD_TODO:
             param.id = (++nextTodoId);
@@ -107,14 +106,16 @@ export default function(state = initialState, action){
             return newState;
         case DELETE_PERSON:
             newState = clonedeep(state);
-            newState.byPerson[param].forEach(todo=>{
-                delete newState.byIds[todo.id];
-                newState.allIds.splice(
-                    newState.allIds.indexOf(todo.id),
-                    1
-                );
-            });
-            delete newState.byPerson[param];
+            if(newState.byPerson[param]){
+                newState.byPerson[param].forEach(todo=>{
+                    delete newState.byIds[todo.id];
+                    newState.allIds.splice(
+                        newState.allIds.indexOf(todo.id),
+                        1
+                    );
+                });
+                delete newState.byPerson[param];
+            }
             return newState;
         default:
             return state;
