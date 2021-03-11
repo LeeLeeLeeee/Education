@@ -12,7 +12,7 @@
     # next라는 이름의 메서드를 제공
     # next 메서드는 value와 done이라는 두 개의 속성을 가진 객체를 반환한다.
 ```
-```javascript
+```typescript
     // 반복기 특징을 구현한 예제.
     const createRangeIterable = (from: number, to: number) : any => {
         let currentValue = from;
@@ -39,7 +39,7 @@
 **[Symbol.iterator] 메서드**  
 `for...of`반복기에서 사용하려면 `[Symbol.iterator]`메서드가 구현되어있어야 한다.  
 따라서 위 예제를 아래와 같이 수정해야 `for...of`에서의 사용이 가능하다.
-```javascript
+```typescript
     class class RangeIterable {
         constructor(public from: number, to: number) {}
         [Symbol.iterator](){
@@ -62,7 +62,7 @@
 
 **Iterable<T>, Iterator<T>**  
 타입스크립트는 반복기 제공자에 `Iterable<T>, Iterator<T>`제네릭 인터페이스를 사용할 수 있다.
-```javascript
+```typescript
     /* 기본 구조 */
     //클래스 타입
     class 구현클래스 implements Iterable<생성할 값의 타입> {}
@@ -96,7 +96,7 @@
 `function*`로 생성된 함수를 `생성기`라고 하며 해당 함수는 `yield`라는 키워드를 제공하며 해당 키워드는 `return`처럼 동작한다.  
 `function*`는 `function`에 `*`를 붙인게 아니라 `function*`이 하나의 키워드이다.  
 따라서 `arrow function`에서는 사용할 수없다.
-```javascript
+```typescript
     function* generator(){
         console.log('generator start...');
         let value = 1;
@@ -113,14 +113,14 @@
 **setInterval 함수와 생성기의 유사성**  
 생성기가 동작하는 방식을 `세미코루틴`이라고 하며 이는 멀티 스레드 방식으로 동작하는 것처럼 보여주는 방식이다.  
 `setInterval`방식도 동일하다.
-```javascript
+```typescript
     /* setInterval 기본 구조 */
     const interval = setInterval(콜백함수, 호출주기)
     clearInterval(interval) // setInterval 해제
 ```
 
 **반복기 제공자의 메서드로 동작하는 생성기 구현**
-```javascript
+```typescript
     class IterableUsingGenerator<T> implements Iterable<T> {
         constructor(private values: T[] = [], private currentIndex: number = 0) {}
         [Symbol.iterator] = function* (this : any) {
@@ -138,7 +138,7 @@
 **yield\* 키워드**
 `yield`는 단순히 값을 대상으로 동작하지만  
 `yield*`는 다른 생성기나 배열을 대상으로 동작한다.
-```javascript
+```typescript
     function* gen12(){
         yield 1
         yield 2
@@ -153,7 +153,7 @@
 
 **yield 반환값**
 `yield`연산자는 값을 반환하며 해당 값은 반복기의 next메서드 호출 때 매개변수에 전달하는 값이다.
-```javascript
+```typescript
     function* gen(){
         let count = 5
         let select = 0

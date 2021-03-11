@@ -4,13 +4,13 @@
 
 ### 함수 선언문
 **기본 함수 선언**  
-```javascript
+```typescript
     function 함수이름(매개변수: 타입, 매개변수: 타입) : 반환 타입{
         /* content */
     }
 ```
 **함수 시그니처**  
-```javascript
+```typescript
     /* 기본 구조 */
     (매개변수 타입[,...]) => 반환 타입
     /* example */
@@ -20,7 +20,7 @@
     let printMe: (string, number) => void  = function(name: string, age: number): void {}
 ```
 **type 키워드로 타입 별칭 작성**  
-```javascript
+```typescript
     /* 기본 구조 */
     type 새로운 타입 = 기존 타입
     /* example */
@@ -31,7 +31,7 @@
 undefined는 하나의 타입으로 모든 타입의 최하위에 존재함  
 따라서 undefined를 호출해도 상위 타입을 상속받는다고 간주하며 오류가 발생하지 않음.
 이런 오류를 방지하기 위해 undefined인지를 판별하는 코드가 추가되어야 함.
-```javascript
+```typescript
     /* error */
     interface INameable {
         name: string
@@ -48,7 +48,7 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
     let n_fix = getName(undefined)
 ```
 **선택적 매개변수**  
-```javascript
+```typescript
     /* 기본구조 */
     function fn(arg1? : string) : void {}
     /* 시그니처 */
@@ -58,7 +58,7 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
 ### 함수 표현식
 함수는 객체이다. 따라서 함수는 하나의 인스턴스로서 변수에 할당할 수있다.
 **함수 표현식**  
-```javascript
+```typescript
     const Add = function(a: number, b: number) : number { return a + b };
     Add(1, 2) // 3
 ```
@@ -74,7 +74,7 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
 `lazy evaluation`를 적용하여 우선 계산을 보류한다.
 
 **익명 함수**  
-```javascript
+```typescript
     /* 
         함수를 감싸주는 이유는 연산자 우선 순위를 먼저 진행하기 위함이다. 
         ex) (1 + 2) * 3 에서 1 + 2를 감싸줘 연산자의 우선 순위를 정하는 원리.
@@ -84,7 +84,7 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
 ### 화살표 함수와 표현식 문
 
 **기본 구조**  
-```javascript
+```typescript
     /* 기본 구조 */
     const 함수이름 = (매개변수: 타입[,...]) : 반환타입 => 함수몸통
     /* example */
@@ -96,7 +96,7 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
 실행문은 CPU에서 실행되는 코드이며 `return`을 해야만 결과를 알려주는 구문이다.  
 표현식 문은 굳이 `return`을 하지 않아도 결과를 알려주는 구문이다.
 표현식 문은 변수에 할당받을 수 있는 코드 단위이기도 하다.
-```javascript
+```typescript
     /* easy example */
     let x // 실행문
     x = 1 //표현식 문
@@ -114,7 +114,7 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
 
 **콜백 함수**  
 매개변수 형태로 동작하는 함수를 `콜백 함수`라고 함.
-```javascript
+```typescript
     /* exmple */
     export const init(callback: () => void): void => {
         callback();
@@ -123,7 +123,7 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
 ```
 **중첩 함수**  
 함수 안에 함수를 중첩해서 구현
-```javascript
+```typescript
     //calc함수는 add, multiply라는 이름의 중첩 함수를 구현하고 있음.
     const calc = (value: number, cb: (number)=> void): void => {
         let add = (a, b) => a + b //표현식 문
@@ -139,7 +139,7 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
 
 **고차 함수**  
 선언된 함수가 또 다른 함수를 반환하는 함수
-```javascript
+```typescript
     const add1 = (a: number, b: number): number => a + b // 보통 함수
     const add2 = (a: number): number => (b: number) : number => a + b // 고차 함수
     add2(1)(2) // 3
@@ -156,7 +156,7 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
 ```
 **부분 함수**  
 고차 함수가 완벽하게 끝나지 않은 상태를 부분 함수라고 한다.
-```javascript
+```typescript
     const multiple = a => b => c => a * b * c
     let multiple_middle = multiple(1)(2); // 부분함수
     multiple_middl(3); // 6
@@ -165,12 +165,12 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
 ### 함수 구현 기법
 
 **매개변수 기본값**  
-```javascript
+```typescript
     (매개변수: 타입 [= 매개변수 기본값])
 ```
 
 **객체를 반환하는 화살표함수**  
-```javascript
+```typescript
     /* 복합 실행 구문 함수로 판단하여 객체가 반환되지 않음 */
     const makePerson(name: string, age: number =10): {name: string, age: number} => {name, age}
     /* 소괄호로 감싸주어야 표현문으로 판단함. */
@@ -178,7 +178,7 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
 ```
 
 **매개변수에 비구조화 할당**  
-```javascript
+```typescript
     type Person = {
         name: string,
         age : number
@@ -187,7 +187,7 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
     printPerson({name:'Jack', age: 23});
 ```
 **색인 키와 값으로 객체 만들기**  
-```javascript
+```typescript
     /* 색인 기능 타입 지정하기 */
     type KeyType = {
         [key: string]: string
@@ -204,7 +204,7 @@ Arrow Function는 this를 사용할 수 없다.
 여기서 사용할 수 있다 없다의 의미는 `this`를 바인딩 할 수 있느냐 없느냐의 차이다.  
 Arrow Function의 this는 정적으로 `상위 스코프의 this`를 바라본다.  
 function으로 생성된 함수는 동적으로 작동하기 때문에 `bind, apply, call` 및 호출 지점에서 결정된다.
-```javascript
+```typescript
     const Fna = function(){console.log(this)};
     const Fnb = () => console.log(this);
     const obj = {"name":"lee"}
@@ -213,7 +213,7 @@ function으로 생성된 함수는 동적으로 작동하기 때문에 `bind, ap
 ```
 
 **기본 메서드**  
-```javascript
+```typescript
     export class A {
         constructor(public value: number =1 ){}
         method(): void {
@@ -230,7 +230,7 @@ function으로 생성된 함수는 동적으로 작동하기 때문에 `bind, ap
     a.method() // value : 2
 ```
 **정적 메서드**  
-```javascript
+```typescript
     export class A {
         static method(): string {
             console.log(`I'm Class A`)
@@ -242,7 +242,7 @@ function으로 생성된 함수는 동적으로 작동하기 때문에 `bind, ap
 
 **메서드 체인**  
 메서드를 이어서 계속 호출하는 방식
-```javascript
+```typescript
     export class Calculator {
         constructor(public value: number = 0){}
         add(value: number) {

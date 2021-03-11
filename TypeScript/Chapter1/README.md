@@ -26,7 +26,7 @@ ts-node -v
     npm i -D @types/node 
     tsc --init # tsconfig.json파일 생성
 ```
-```javascript
+```typescript
     //package.json 수정
     {
         "script": {

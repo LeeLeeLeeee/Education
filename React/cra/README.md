@@ -21,7 +21,7 @@
 
 Store에 변화가 필요할 때 Redux의 Action이 필요하다.
 Action은 객체로 이루어져있으며 `type`은 필수 필드이다.
-```javascript
+```typescript
     {
         type: 'DASHBOARD/INCREASE',/* 필수 */ 
         data : '@SOMETHING', /* 선택 */
@@ -30,7 +30,7 @@ Action은 객체로 이루어져있으며 `type`은 필수 필드이다.
 
 ##### 액션 생성 함수
 Action은 생성 함수는 Action을 좀더 쉽게 사용하기 위해 필요하며 해당 함수는 Action이 어떤 인자를 받아올 지 설정할 수 있다.
-```javascript
+```typescript
     export const CREATEACTION = text => ({
         type: 'DASHBOARD/INCREASE', /* 필수 */
         text, /* 선택 */
@@ -40,7 +40,7 @@ Action은 생성 함수는 Action을 좀더 쉽게 사용하기 위해 필요하
 #### 리듀서 (Reducer)
 Store에 변화를 발생시키는 함수, Store상태인 State와 action을 인자로 받는다.
 `(state, action)=> newState`라고 생각하면 됨.
-```javascript
+```typescript
     function reducer(state, action) {
         switch(action.type){
             case 'DASHBOARD/INCREASE':

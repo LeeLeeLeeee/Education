@@ -29,7 +29,7 @@ Action, Reducer, Store로 폴더를 구별하여 코드가 훨씬 간결해짐.
 
 ### Notice
 **mapStateToProps**
-```javascript
+```typescript
     //mapStateToProps에서 store의 state를 가져오는 작업을 할 때 해당 작업을 모듈화 하는 작업을 할 때 좋을 것 같다.
     /* 
         VISIBILITY_FILTERS = {
@@ -78,7 +78,7 @@ Action, Reducer, Store로 폴더를 구별하여 코드가 훨씬 간결해짐.
 ```
 
 **mapDispatchToProps**
-```javascript
+```typescript
     // connect로 mapDispathToProps를 연결해줄 때의 방식들
     // 1. 기본 mapDispatchToProps 함수 생성 후 각 key에 맞는 reducer 매칭
     // 추가된 dept는 개인적으로 추가한 내용이며 각 컴포넌트에 맞게 구별해둠.
@@ -112,7 +112,7 @@ Action, Reducer, Store로 폴더를 구별하여 코드가 훨씬 간결해짐.
     connect(mapStateToProps,{increase, decrease, update})(CounterApp)
 ```
 **combineReducers**
-```javascript
+```typescript
     //분리하여 작성한 reducer를 하나로 합쳐주는 함수
     export default combineReducers({reducer_1, reducer_2});
 ```

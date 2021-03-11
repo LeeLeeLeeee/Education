@@ -7,7 +7,7 @@
 **Promise란?**  
 ES5에서 정식 기능으로 채택된 비동기 처리 클래스.  
 `Promise`의 콜백 함수는 `resolve`, `reject`를 매개 변수로 가진다.
-```javascript
+```typescript
     /* 기본 구조 */
     const promise = new Promise(콜백 함수)
     // 콜백함수 = (resolve, reject) => {}
@@ -19,7 +19,7 @@ ES5에서 정식 기능으로 채택된 비동기 처리 클래스.
 ```
 
 **Promise**  
-```javascript
+```typescript
     Promise()
     //속성
     Promise.length
@@ -36,7 +36,7 @@ ES5에서 정식 기능으로 채택된 비동기 처리 클래스.
 ```
 
 **resolve, reject 메서드**  
-```javascript
+```typescript
     //할당 식.
     let AsyncObj = new Promise((reslove, reject)=>{
         /* 성공 */
@@ -67,7 +67,7 @@ ES5에서 정식 기능으로 채택된 비동기 처리 클래스.
 ```
 **then-체인**  
 then 반환 값이 Promise면 해당 Promise를 수행한 값을 반환 함.
-```javascript
+```typescript
     Promise.resolve(1)
         .then((value:number)=>{
             console.log(value);
@@ -81,7 +81,7 @@ then 반환 값이 Promise면 해당 Promise를 수행한 값을 반환 함.
 **Promise.all 메서드**  
 한`Array`에 담긴 `Promise`가 모두 `fullfilled`인 로직을 작성해야할 때 사용.  
 `Array.every`의 역할과 비슷
-```javascript
+```typescript
     const getAllResolvedResult = <T>(promises: Promise<T>[]) => Promise.all(promises)
 
     getAllResolvedResult<any>( [Promise.resolve(true), Promise.resolve('hello')] )
@@ -96,7 +96,7 @@ then 반환 값이 Promise면 해당 Promise를 수행한 값을 반환 함.
 **Promise.all 메서드**  
 한`Array`에 담긴 `Promise`중에서 가장 먼저 완료된 상태로 `Promise 상태`를 반환
 `Array.some`의 역할과 비슷
-```javascript
+```typescript
     const getRaceResolvedResult = <T>(promises: Promise<T>[]) => Promise.race(promises)
 
     function setTimeoutPromise(time, param, type){
@@ -123,7 +123,7 @@ then 반환 값이 Promise면 해당 Promise를 수행한 값을 반환 함.
 
 ### async와 await 구문  
 
-```javascript
+```typescript
     /* 기본 형식 */
     const test = async () => {
         const value = await Promise.resolve(1)
@@ -136,7 +136,7 @@ then 반환 값이 Promise면 해당 Promise를 수행한 값을 반환 함.
 
 **async 키워드**  
 await 키워드는 async키워드가 사용된 곳에서만 사용할 수있다.
-```javascript
+```typescript
     /* 기본 형식 */
     // arrow
     const test1 = async () => {}
@@ -146,7 +146,7 @@ await 키워드는 async키워드가 사용된 곳에서만 사용할 수있다.
 **async 함수의 두 가지 성질**
 1. 일반 함수처럼 사용할 수 있다.
 2. Promise 객체로 사용할 수 있다.
-```javascript
+```typescript
     // async 함수를 Promise처럼 사용한 경우
     async function test1() {
         const value = await 'hello'
@@ -169,7 +169,7 @@ await 키워드는 async키워드가 사용된 곳에서만 사용할 수있다.
 
 **async 예외처리**
 async함수에서 error발생 시 catch로 처리해줘야 한다.
-```javascript
+```typescript
     const asyncException = async () => {
         throw new Error('error')
     }
@@ -179,7 +179,7 @@ async함수에서 error발생 시 catch로 처리해줘야 한다.
 ```
 
 **async 함수와 Promise.all**
-```javascript
+```typescript
     const getPromiseAll = async(asyncArr) => {
         return await Promise.all(
             asyncArr

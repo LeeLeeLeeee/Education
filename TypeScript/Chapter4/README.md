@@ -7,7 +7,7 @@
 **for - in**  
 객체를 대상으로 사용, 배열도 객체이기 때문에 가능  
 객체는 key, 배열은 index를 반환함.
-```javascript
+```typescript
     let obj = {'a': 'b', 'c':'d'};
     let arr = [3, 2, 1];
     for(const index in arr){
@@ -20,14 +20,14 @@
 
 **for - of**  
 `Iterator`타입만 가능 아이템 값을 직접 순회함.
-```javascript
+```typescript
     for(const item in arr){
         console.log(item) // 3, 2, 1
     }
 ```
 **제네릭 방식 타입**  
 타입을 변수로 취급하는 것을 `제네릭 타입`이라고 함.
-```javascript
+```typescript
     const arrayLength = (array: T[]): number => array.length
     /* 컴파일러가 T의 의미를 알 수 있게 T가 타입변수라고 알려주자 => */
     const arrayLength = <T>(array: T[]): number => array.length
@@ -39,7 +39,7 @@
     arrayLength(strArr) // 3
 ```
 **제네릭 함수 타입 추론**  
-```javascript
+```typescript
     /* 기본 구조 */
     함수이름<T>(매개변수)
     /* example */
@@ -49,7 +49,7 @@
 ```
 
 **제네릭 함수와 함수 시그니처 오류**  
-```javascript
+```typescript
     const normal = (cb : (number) => number): void => {}
     const error = (cb : (number, number?) => number): void => {} //error 발생
     const fixed = (cb : (a: number, number?) => number): void => {} //error 해결
@@ -65,7 +65,7 @@
 **선언형 프로그래밍 vs 명령형 프로그래밍**  
 
 명령형 프로그래밍
-```javascript
+```typescript
 //1. 입력 데이터 얻기
 //2. 입력 데이터 가공해 출력데이터 생성
 //3. 출력 데이터 출력
@@ -77,7 +77,7 @@ for(;;){
 ```
 
 선언형 프로그래밍
-```javascript
+```typescript
 //1. 문제를 푸는 데 필요한 모든 데이터 배열에 저장
 //2. 입력 데이터 배열을 가공해 출력 데이터 배열 생성
 //3. 출력 데이터 배열에 담긴 아이템 출력
@@ -89,21 +89,21 @@ arr.map().filter().map()....
 
 **Map**  
 새로운 배열 반환
-```javascript
+```typescript
     let arr = [1,2,3];
     let arr_2 = arr.map(item=>item+1);
     arr_2 // [2,3,4]
 ```
 **Filter**  
 배열 필터링
-```javascript
+```typescript
     let arr = [1,2,3];
     let arr_2 = arr.filter(item=> item % 2 === 1);
     arr_2 // [1, 3]
 ```
 **Reduce**  
 배열 순회하며 리턴 값 반환
-```javascript
+```typescript
     let arr = [1,2,3];
     /* 
         reduce(callback함수, initValue)
@@ -125,7 +125,7 @@ arr.map().filter().map()....
 **순수 함수란**  
 함수형 프로그래밍에서 함수는 `순수 함수`라는 조건을 만족해야 함.  
 
-```javascript
+```typescript
 /* 순수 함수 조건 */
 // 1. 함수 내부에 입출력 관련 코드가 없어야함.
 // 2. 함수 내부에서 매개변숫값을 변경시키지 않는다.
@@ -147,14 +147,14 @@ function(a, b){
 ```
 **reaonly**  
 순수함수 구현을 쉽게 하도록 `readonly`키워드를 제공함
-```javascript
+```typescript
     function forcePure(arr: readonnly number[]){
         arr.push(1) // error
     }
 ```
 **가변 인수 함수와 순수 함수**  
 함수를 호출할 때 전달하는 인수의 개수를 제한하지 않는 것을 `가변 인수`라고 합니다.
-```javascript
+```typescript
     /* 매개변수로 넘어온 배열을 합치는 순수 함수 mergeArray를 작성해보자. */
     /* 
         매개변수에 전개연산자를 쓰면 매개변수를 각각 배열에 담은 후 뿌려준다.
@@ -175,6 +175,6 @@ function(a, b){
 ```
 **튜플**  
 `javascript`에는 튜플의 개념이 없으며 단순히 여러 타입에 대응하는 배열 정도로 사용한다.
-```javascript
+```typescript
     const tuple [boolean, string] = [true, 'the result OK!']
 ```

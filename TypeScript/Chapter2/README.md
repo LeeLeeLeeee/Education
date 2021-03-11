@@ -5,12 +5,12 @@
 ### 변수 선언
 
 **타입 주석**  
-```javascript
+```typescript
     let 변수이름: 타입 [= 초기값] // let은 추후에 할당에도 무관.
     const 변수이름: 타입 = 초기값 // const는 선언과 동시에 할당해야함.
 ```
 **타입 추론**  
-```javascript
+```typescript
     let variable = 1 // number 형으로 판단.
     let variable = 'string' // string 형으로 판단.
 ```
@@ -18,7 +18,7 @@
 ### 객체와 인터페이스
 
 **인터페이스**  
-```javascript
+```typescript
     /* 기본 구조 */
     interface 인터페이스명 {
         속성 명[?]: 속성 타입[,...]
@@ -40,7 +40,7 @@
     }
 ```
 **클래스**  
-```javascript
+```typescript
     /* 기본 구조 */
     class 클래스명 {
         //접근제한자 누락 시 public이 default
@@ -69,7 +69,7 @@
 ```
 **클래스 & 인터페이스**  
 클래스 구조를 인터페이스 구조에 맞게 작성하게 설정.
-```javascript
+```typescript
     /* 기본 구조 */
     class 클래스명 implements 인터페이스명 {
     }
@@ -92,7 +92,7 @@
 `abstract`키워드를 사용하여 상속받는 클래스에서 해당 속성들을 사용하게 함.  
 `abstract`가 붙은 class는 new로 생성할 수 없음.  
 ``
-```javascript
+```typescript
     /* 기본 구조 */
     abstract class 클래스명 {
         abstract 속성이름: 속성타입
@@ -117,7 +117,7 @@
 ```
 **static(정적) 속성**  
 객체가 생성되지 않아도 호출할 수 있는 속성이다
-```javascript
+```typescript
     class A {
         static initValue = 1
     }
@@ -126,7 +126,7 @@
 
 **객체의 타입 변환**  
 특정 타입의 변숫값을 다른 타입의 값으로 변환할 수 있는 기능
-```javascript
+```typescript
     /* 기본 구조 */
     (<타입>객체)
     (객체 as 타입)

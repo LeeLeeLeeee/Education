@@ -16,16 +16,16 @@
 ## 주요 문법
 **ES6**
 1. 비구조화 할당
-```javascript
+```typescript
     let obj = {}
     //...obj
 ```
 2. 화살표 함수
-```javascript
+```typescript
     const Fn = () => {};
 ```
 3. 클래스
-```javascript
+```typescript
     abstract class Animal {
         constructor(public name?: string, public age: number) {}
         abstract say(): string
@@ -36,11 +36,11 @@
     new Cat('야옹이', 4);
 ```
 4. 모듈
-```javascript
+```typescript
 import, export
 ```
 5. 생성기(yield)
-```javascript
+```typescript
     function* gen() {
         yield* [1, 2]
     }
@@ -48,7 +48,7 @@ import, export
 ```
 
 6. Promise와 async/await
-```javascript
+```typescript
     async function get(){
         let value = [];
         value.push(await Promise.resolve(1));
@@ -61,28 +61,28 @@ import, export
 
 **타입스크립트 고유 문법**
 1. 타입 주석과 타입 추론
-```javascript
+```typescript
     let n : number = 1; // (타입 주석) ":"를 기준으로 타입 설정
     let n = 1; // (타입 추론) Input 값을 분석해 왼쪽 타입을 지정
     // 타입 추론은 JS와 호환을 용이하게 해줌.
 ```
 
 2. Interface
-```javascript
+```typescript
     interface Person {
         name: string,
         age?: number
     }
 ```
 3. Tuple
-```javascript
+```typescript
  //배열과 비슷하며 한 배열안에 동일한 타입이 있으면 배열, 여러 타입이 있으면 튜플이다.
  let arr : number[] = [1, 2, 3]; // Array
  let tuple : [boolean, number, string] = [true, 3, 'a'];
 ```
 
 4. 제네릭 타입
-```javascript
+```typescript
     //다양한 타입을 취급할 수 있게 해준다.
     class Container<T>{
         constructor(public value: T){ }
@@ -92,7 +92,7 @@ import, export
 ```
 
 5. 대수 타입
-```javascript
+```typescript
     type NumberOrString = number | string // number 또는 string 타입 가능
     type AnimalAndPerson = Animal & Person // Animal과 Person이 겹치는 부분의 타입.
 ```
@@ -103,4 +103,5 @@ import, export
 [3.함수와 메서드](./Chapter3)  
 [4.배열과 튜플](./Chapter4)  
 [5.반복기와 생성기](./Chapter5)  
-[6.비동기 API](./Chapter5)  
+[6.비동기 API](./Chapter6)  
+[7.함수 조합의 원리와 응용](./Chapter7)
