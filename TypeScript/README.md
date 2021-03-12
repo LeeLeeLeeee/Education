@@ -105,3 +105,4 @@ import, export
 [5.반복기와 생성기](./Chapter5)  
 [6.비동기 API](./Chapter6)  
 [7.함수 조합의 원리와 응용](./Chapter7)
+[8.람다 라이브러리](./Chapter8)
