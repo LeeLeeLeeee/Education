@@ -11,7 +11,6 @@ const initialState = [];
 
 export default function(state = initialState, action){
     const name = action.payload || '';
-    console.log('---reducer---')
     switch(action.type){
         case ADD_PERSON:
             return [...state, name]

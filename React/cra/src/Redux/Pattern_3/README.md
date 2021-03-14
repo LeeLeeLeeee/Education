@@ -1,4 +1,4 @@
-# Redux Pattern - 1.
+# Redux Pattern - 3.
 
 ###  프로젝트 목적
 **1. ReduxToolKit을 사용한 패턴 구현.**  

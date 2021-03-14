@@ -11,6 +11,7 @@ import ClassFour from "./Class/class_4";
 import RedexOne from "./Redux/Pattern_1";
 import ReduxTwo from "./Redux/Pattern_2";
 import ReduxThree from "./Redux/Pattern_3"
+import ReduxFour from './Redux/MiddleWare'
 
 const Home = () => <p>React Edu Page</p>;
 
@@ -45,12 +46,23 @@ function App() {
                 </li>
                 <li class="list-group-item list-group-item-action">
                   <Link to="/REDUX/1">Redux-1</Link>
+                  <br />
+                  <small> * 기본 패턴 </small>
                 </li>
                 <li class="list-group-item list-group-item-action">
                   <Link to="/REDUX/2">Redux-2</Link>
+                  <br />
+                  <small> * Ducks 패턴 </small>
                 </li>
                 <li class="list-group-item list-group-item-action">
                   <Link to="/REDUX/3">Redux-3</Link>
+                  <br />
+                  <small> * ReduxToolkit 패턴 </small>
+                </li>
+                <li class="list-group-item list-group-item-action">
+                  <Link to="/REDUX/4">Redux-4</Link>
+                  <br />
+                  <small> * MiddleWare </small>
                 </li>
               </ul>
             </div>
@@ -64,6 +76,7 @@ function App() {
                 <Route exact path="/REDUX/1" component={RedexOne}></Route>
                 <Route exact path="/REDUX/2" component={ReduxTwo}></Route>
                 <Route exact path="/REDUX/3" component={ReduxThree}></Route>
+                <Route exact path="/REDUX/4" component={ReduxFour}></Route>
               </Switch>
             </div>
           </div>
