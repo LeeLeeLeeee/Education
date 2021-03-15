@@ -48,7 +48,6 @@ function* fetchSagaApi(action){
     try {
         
         yield put(requestSaga())
-        console.log('---aa')
         const data = yield call(asyncApi, action.payload, 'fetch')
         
         yield put(successSaga(data))

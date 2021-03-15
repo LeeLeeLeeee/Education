@@ -19,7 +19,11 @@ const PostApp = (props) => {
         increase,
         decrease
     } = props.countHandler
-    
+        
+    const stateProps = {
+        saga: props.sagaState,
+        thunk: props.state
+    }
     return (
         <>
             <p className={'text-center'}>Test a middleware API😉</p>
@@ -31,8 +35,8 @@ const PostApp = (props) => {
                 </div>
             </div>
             <div style={boxStyle}>
-              <RequestBtn {...props.handler} />
-              <MainView {...props.state}/>
+              <RequestBtn {...props.handler}  />
+              <MainView  {...stateProps} />
             </div>
         </>
     );
@@ -41,6 +45,7 @@ const PostApp = (props) => {
 
 const mapStateToProps = (state) => ({
     state: state.person,
+    sagaState:state.sagaPerson,
     count: state.sagaPerson.count
 });
 

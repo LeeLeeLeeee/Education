@@ -1,7 +1,10 @@
 import React from 'react'
 
 
-export default function({loading, error, persons}){
+export default function(props){
+    console.log(props)
+    const {loading, error, persons} = props.thunk
+    
     return (
         <div>
             <div className={'h5'}>THUNK</div>
@@ -28,6 +31,25 @@ export default function({loading, error, persons}){
             
             </div>
             <div className={'h5'}>SAGA</div>
+            {
+                props.saga.loading ? 
+                (
+                    <div class="spinner-border text-success" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                ) :
+                props.saga.error ? 
+                (
+                    <p>error!!</p>
+                ) :
+                props.saga.persons.length > 1 ? 
+                (
+                    <pre>{props.saga.persons.map(item=>JSON.stringify(item)).join('\n')}</pre>
+                ) :
+                (
+                    <p>API를 호출해주세요!!</p>
+                )
+            }
         
         </div>
       
