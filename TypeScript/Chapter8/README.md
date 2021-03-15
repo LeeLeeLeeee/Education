@@ -540,4 +540,155 @@ chance패키지는 그럴듯한 가짜 데이터를 만들어주는 라이브러
 ```
 
 ### 조합 논리 이해하기
-함수형 프로그래밍의 가장 큰 이론적인 배경은 `람다 수학`과 `조합 논리학`, 그리고 `카테고리 이론`이다,
+함수형 프로그래밍의 가장 큰 이론적인 배경은 `람다 수학`과 `조합 논리학`, 그리고 `카테고리 이론`이다,  
+`람다 수학`의 모든 이론을 컴퓨터 프로그래밍 언어로 표현할 수 없으므로 어떤 제한된 범위에서 람다 수학을 구현하기 위해 `조합 논리학`이 생겨났다.  
+
+**조합자란?**  
+특별한 형태의 고차 함수들을 결합해 새로운 조합자를 만들어내는 것.
+|조합자 이름|의미|람다함수 이름|
+|:---:|:---:|:---:|
+|I|identity|R.identity|
+|K|constant|R.always|
+|T|thrush|R.applyTo|
+|W|duplication|R.unnest|
+|C|flip|R.flip|
+|S|substitution|R.ap|
+
+조합자들을 동작방식을 이해하는 것은 상당히 복잡하다.  
+우선 `R.chain`함수를 통해 조합자들을 결합한다는 것이 어떤 의미인지 알아보자.  
+
+**R.chain**  
+람다 라이브러리는 `R.chain`이라는 함수를 제공한다.  
+이 함수는 매개변수로 함수를 받으며 매개변수가 한 개일 때와 두 개일 때의 동작이 서로 다르다.  
+```typescript
+    R.chain(콜백 함수)
+    R.chain(콜백 함수1, 콜백 함수2)
+
+    const array = [1, 2, 3]
+    /* 매개 변수 한 개일 때 */
+    R.pipe(
+        R.chain(n => [n, n]),
+        R.tap(n => console.log(n)) // [1, 1, 2, 2, 3, 3]
+    )(array)
+    /* process */
+    R.pipe(
+        R.map(n => [n, n]), // [ [1,1], [2,2], [3,3] ]
+        R.flatten // [1, 1, 2, 2, 3, 3]
+    )
+
+    /* 매개 변수 두 개일 때 */
+    R.pipe(
+        R.chain(R.append, R.head), // R.append(R.head(array))(array)
+        R.tap(n => console.log(n)) // [1, 2, 3, 1]
+    )(array)
+```
+
+**R.flip 조합자**  
+2차 고차 함수의 매개변수 순서를 뒤집는 역할
+```typescript
+    const flip = cb => a => b => cb(b)(a)
+    const reverseSubtract = flip(R.subtract)
+    const newArray = R.pipe(
+        R.map(reverseSubtract(10)), // value - 10
+        R.tap(a => console.log(a)) // [-9, -8, ... , -1]
+    )(R.range(1, 9 + 1))
+```
+
+**R.identity**  
+다음처럼 가장 단순한 조합자이지만, 조합자의 구조상 반드시 함수가 있어야하는 곳에 위치할 때  
+그 위력을 발휘합니다.
+```typescript
+    const array = [ [1], [2], [3] ]
+    R.pipe(
+        R.chain(R.identity),
+        R.tap(a => console.log(a)) // [1, 2, 3]
+    )(array)
+    // 특정 값 이상일 경우 할인해주는 코드
+    type NumberToNumFunc = (n: number) => number
+    const applyDiscount = (minimum: number, discount: number): NumbertoNumFunc => 
+        R.pipe(
+            R.ifElse(
+                /* 
+                    우리가 원하는 로직 "minimum <= x"
+                    따라서 flip 해주는 이유는 코드의 직관성을 위해 써주는 게 나을 것 같다.
+                    flip을 하지 않으면 R.lte(minimum) 이렇게 해줘야함.
+                */
+                R.flip(R.gte)(minimum),
+                R.flip(R.subtract)(discount), //[true] x - discount
+                R.identity // [false] 넘어가기
+            ),
+            R.tap(amount => conole.log(amount))
+        )
+    const calcPrice = applyDiscount(5000, 500) // 5000원 이상 구매하면 500원 discount
+    calcPrice(6000) //5,500
+    calcPrice(4500) //4,500 
+```
+
+**R.always**  
+다음처럼 두 개의 고차 매개변수 중 첫 번째 것을 반환한다.  
+`R.always`는 두 개의 매개변수가 필요한 조합자에 마치 `R.identity`처럼 사용됩니다.  
+비록 `R.always` 항상 첫 번째 매개변수값만 반환하지만, `R.flip(R.always)`는 반대로 항상 두 번째 매개변수값만 반환한다.
+```typescript
+    //always = x => y => x
+    const alwaysSample = <T>(a: T) => (b: T) => R.always(a, b)
+    const alwaysReverseSample = <T>(a: T) => (b: T) => R.flip(R.always)(a, b)
+    alwaysSample(1)(2) // 1
+    alwaysReverseSample(1)(2) // 2
+```
+
+**R.applyTo**  
+`R.applyTo`는 값을 첫 번째 매개변수, 해당 값을 입력받는 콜백 함수를 두 번째 매개변수로 받아 동작한다.
+```typescript
+    //applyTo = value => cb => cb(value)
+    const T = value => R.pipe(
+        R.applyTo(value),
+        R.tap(value => console.log(value))
+    )
+
+    const value100 = T(100)
+    const sampleValue = value100(R.identity) // 100
+    const add1Value = value100(R.add(1)) // 101
+```
+
+**R.ap 조합자**  
+`R.ap`조합자는 콜백 함수들의 배열을 첫 번째 매개변수로, 배열을 두 번째 매개변수로 입력받는 2차 고차 함수입니다.  
+```typescript
+    const ap = ([콜백함수]) => 배열 => [콜백함수](배열)
+```
+콜백 함수가 한 개일 때는 마치 R.map함수처럼 동작합니다.
+```typescript
+    const callAndAppend = R.pipe(
+        R.ap([R.multiply(2)]),
+        R.tap(a => console.log(a))
+    )
+    const input = [1, 2, 3]
+    const result = callAndAppend(input) // [2, 4, 6]
+    /* 
+        R.map(n => R.multiply(2)(n) )([1, 2, 3]) 
+        ===
+        R.ap(R.multiply(2))([1, 2, 3])
+     */
+```
+콜백 함수가 두 개일 때는 마치 `R.chain(n => [n, n])`형태로 동작합니다.  
+즉 각각 콜백 함수를 적용한 배열을 만든 후 연산이 끝나면 해당 배열을 통합해 한 개로 만들어 준다.
+```typescript
+    const callAndAppend = R.pipe(
+        R.ap([R.multiply(2). R.add(10)]),
+        R.tap(a => console.log(a))
+    )
+    const input = [1, 2, 3]
+    callAndAppend(input) // [2, 4, 6, 11, 12, 13]
+    /* 
+        [ R.multiply => [2, 4, 6], R.add => [11, 12, 13] ] 
+     */
+```
+이런 성질을 이용해 배열 복제한 뒤 통합한 배열을 만들어 보자.
+```typescript
+    const repeat = (N, cb) => R.range(1, N + 1).map(n => cb)
+    const callAndAppend = R.pipe(
+        R.ap(repeat(3, R.identity)),
+        R.tap(a => console.log(a))
+    )
+    const input = [1, 2, 3]
+    const result = callAndAppend(input) // [1, 2, 3, 1, 2, 3, 1, 2, 3]
+```
