@@ -8,16 +8,45 @@
 4. Class-4. react-router-dom Component와 Props를 정리한다.
 
 
-### react-redux 
-**Redux 폴더의 Pattern 폴더를 참고하도록 하자.**
-1. [Pattern-1. Redux 기본 패턴](./src/Redux/Pattern_1)
-2. [Pattern-2. Ducks 패턴](./src/Redux/Pattern_2)
-3. [Pattern-3. Redux-toolkit을 이용한 패턴](./src/Redux/Pattern_3)
+### Mobx
+**MobX폴더를 참고하도록 하자.**  
+[Pattern-1. Redux 기본 패턴](./src/MobX/)
 
-### Redux 키워드 숙지
+**MobX 사이트**  
+[Mobx 소개 사이트](https://doc.ebichu.cc/mobx/intro/concepts.html)  
+
+**MobX 키워드**  
+
+**- State**  
+현재 페이지에서 가지고 있는 데이터 상태
+
+**- Derivations**  
+`Derivations`은 `State`가 변경되면 자동으로 `update`가 된다. 따라서 중간 `value`를 확인하는 것은 불가능하다.  
+모든 `Derivations`는 기본적으로 동시에 일어난다. `Computed value`는 `lazily`하게 `update` 되는데 적극적으로  
+사용되어지지 않은 `Compted value`는 필요할 때까지 업데이트되지 않으며 긴 시간 사용되지 않으면 자동으로  
+`garbage collected`된다. `Computed value`는 `state`를 바꾸지 않는다.
+
+
+- Delivations에는 `2가지`종류가 있다.
+    - `Computed values` : 항상 최근 `state`로 부터 파생된 데이터를 가질 수 있으며 순수 함수이다.
+    - `Reactions` : `state`가 변경될 때마다 발생하는 코드.
+
+**Actions**  
+`State`를 변경해주는 코드다.
+
+
+
+### react-redux 
+**Redux 폴더의 Pattern 폴더를 참고하도록 하자.**  
+1. [Pattern-1. Redux 기본 패턴](./src/Redux/Pattern_1)  
+2. [Pattern-2. Ducks 패턴](./src/Redux/Pattern_2)  
+3. [Pattern-3. Redux-toolkit을 이용한 패턴](./src/Redux/Pattern_3)  
+4. [MiddleWare. Redux-sage와 Redux-thunk를 알아보자.](./src/Redux/MiddleWare)  
+
+**Redux 키워드 숙지**  
 [Redux 키워드 사이트](https://redux.js.org/tutorials/essentials/part-1-overview-concepts#terminology)
 
-#### 액션 (Action)
+**액션 (Action)**  
 
 Store에 변화가 필요할 때 Redux의 Action이 필요하다.
 Action은 객체로 이루어져있으며 `type`은 필수 필드이다.
@@ -28,7 +57,7 @@ Action은 객체로 이루어져있으며 `type`은 필수 필드이다.
     }
 ```
 
-##### 액션 생성 함수
+**액션 생성 함수**  
 Action은 생성 함수는 Action을 좀더 쉽게 사용하기 위해 필요하며 해당 함수는 Action이 어떤 인자를 받아올 지 설정할 수 있다.
 ```javascript
     export const CREATEACTION = text => ({
@@ -37,7 +66,7 @@ Action은 생성 함수는 Action을 좀더 쉽게 사용하기 위해 필요하
     })
 ```
 - - -
-#### 리듀서 (Reducer)
+**리듀서 (Reducer)**  
 Store에 변화를 발생시키는 함수, Store상태인 State와 action을 인자로 받는다.
 `(state, action)=> newState`라고 생각하면 됨.
 ```javascript
@@ -53,20 +82,20 @@ Store에 변화를 발생시키는 함수, Store상태인 State와 action을 인
     }
 ```
 - - -
-#### 스토어 (Store)
+**스토어 (Store)**  
 리덕스에서는 한 애플리케이션당 하나의 스토어를 생성함. 스토어에는 현재 앱 상태, 리듀서 및 내장 함수가 들어있음.
 - - -
-#### 디스패치 (Dispatch)
+**디스패치 (Dispatch)**  
 Store 내장함수 중 하나로, Action을 발생 시키는 것 임. Dispath는 action을 파라미터로 전달하며
 Store는 Reducer로 전달해서 `action.type`에 맞는 로직을 처리 해줌.
 - - -
-#### 구독 (Subscribe)
+**구독 (Subscribe)**  
 
 구독 또한 Store의 내장함수 중 하나이며 함수 형태의 값을 파라미터로 받아옴.
 Action이 Dispatch 되었을 때 마다 전달해준 함수가 호출됨.
 - - -
 
-### 커넥트 (Connect)
+**커넥트 (Connect)**  
 
 Store의 내장함수로 mapStateToProps, mapDispatchToProps를 인자로 받아 호출하면 Wrapper Container를 인자로 받는 함수를 반환한다.   
 해당 함수는 각각 State, Dispatch를 Wrapper Container로 넘어온 Component에 주입해준다.

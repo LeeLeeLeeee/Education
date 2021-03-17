@@ -85,13 +85,13 @@ axios[method](link, axiosConfig)
     applyMiddleware(thunk)
 ```
 생성된 함수들은 `connect`를 이용하여 `action`들을 연결하듯 `Component`와 연결하거나  
-`useDispatch()`Hook을 사용하여 `dispatch`해줍니다.
+`useDispatch()`Hook을 사용하여 `dispatch`해줍니다.  
 **Saga**  
 `Saga`는 `제너레이터(function*)`을 이용한 `Redux Async` 라이브러리다.  
 `제너레이터`는 함수를 `iterator`할 수 있게 만들어주며 `yield`를 만날 때마다  
 상태가 `pause`되고 `next()`메서드를 해주면 다음 `yield`까지 넘어간다.  
 Saga 기본 메서드
-- `Saga`는 `Thunk`보다 더 많은 기능들을 지원하며 간단하게 몇 가지 메소드만 사용해보았다.
+`Saga`는 `Thunk`보다 더 많은 기능들을 지원하며 간단하게 몇 가지 메소드만 사용해보았다.
 - `delay` : 지정 시간까지 await하게 해주는 함수
 - `put`   : action을 dispatch해주는 함수.
 - `call`  : `Promise`상태를 받으며 `Resolve`한 `Data`를 반환한다.
