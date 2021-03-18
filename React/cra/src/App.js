@@ -12,6 +12,7 @@ import RedexOne from "./Redux/Pattern_1";
 import ReduxTwo from "./Redux/Pattern_2";
 import ReduxThree from "./Redux/Pattern_3"
 import ReduxFour from './Redux/MiddleWare'
+import Mobx from './MobX/Container'
 
 const Home = () => <p>React Edu Page</p>;
 
@@ -64,6 +65,9 @@ function App() {
                   <br />
                   <small> * MiddleWare </small>
                 </li>
+                <li class="list-group-item list-group-item-action">
+                  <Link to="/Mobx">Mobx</Link>
+                </li>
               </ul>
             </div>
             <div className={"p-1 w-100 m-1 overflow-auto h-100"}>
@@ -77,6 +81,8 @@ function App() {
                 <Route exact path="/REDUX/2" component={ReduxTwo}></Route>
                 <Route exact path="/REDUX/3" component={ReduxThree}></Route>
                 <Route exact path="/REDUX/4" component={ReduxFour}></Route>
+                <Route exact path="/Mobx" component={Mobx}></Route>
+
               </Switch>
             </div>
           </div>
