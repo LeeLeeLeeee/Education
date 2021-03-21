@@ -10,7 +10,7 @@
 
 ### Mobx
 **MobX폴더를 참고하도록 하자.**  
-[Pattern-1. Redux 기본 패턴](./src/MobX/)
+[Mobx Project](./src/MobX/)
 
 **MobX 사이트**  
 [Mobx 소개 사이트](https://doc.ebichu.cc/mobx/intro/concepts.html)  
