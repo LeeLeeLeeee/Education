@@ -107,7 +107,7 @@
 ```
 
 **MobX 상속과 action.bound**
-`MobxX`용 `Class`를 상속할 때 `override`되는 경우의 코드  
+`MobX`용 `Class`를 상속할 때 `override`되는 경우의 코드  
 `action.bound`타입으로 작성하면 자동으로 해당 `this`를 `bind`해준다.
 ```javascript
     class Parent {
@@ -126,7 +126,7 @@
     }
 
     class Child extends Parent {
-        // TypeError : instance는 rededine할 수 없어서  error
+        // TypeError : instance는 redefine할 수 없어서  error
         arrowAction = () => {}
 
         // OK!
@@ -322,6 +322,7 @@
 
     // SomthingComponent.js === start
     @inject(store => store.person)
+    @observer
     class SomethingComponent extends React.Component {
         store
         constructor(props){
