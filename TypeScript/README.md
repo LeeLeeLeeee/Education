@@ -21,7 +21,7 @@
 트랜스파일러를 사용하여 `ES5`와 같은 안정 버전으로 낮추어 사용하자.
   
 1. 구조 분해 할당  
-   배열이나 객체의 속성을 해체하여 그 값을 개별 변수에 담을 수 있게하는 표현식.
+   - 배열이나 객체의 속성을 해체하여 그 값을 개별 변수에 담을 수 있게하는 표현식.
 ```typescript
     // 1. 객체
     const Person = {
@@ -50,8 +50,8 @@
     const [a, b, ...rest] = numArr;
     // rest => [3, 4]
 ```
-2. 화살표 함수
-   화살표 함수는 함수 표현식을 단축시켜서 표현하는 방식으로서  
+2. 화살표 함수  
+   - 화살표 함수는 함수 표현식을 단축시켜서 표현하는 방식으로서  
    코드를 간결하게 해준다 또한 `this, arguments, super`를 바인딩 하지 않기 때문에 생성자로서 사용될 수 없고
    `this`는 항상 상위 스코프의 `this`를 바라본다.
    > `this`는 기본적으로 자바스크립트에서는 호출한 곳을 기준으로 바인딩을 한다.
@@ -87,7 +87,7 @@
 
 
 ```
-3. 클래스
+3. 클래스  
 ```typescript
     abstract class Animal {
         constructor(public name?: string, public age: number) {}
@@ -102,8 +102,8 @@
      */
     new Cat('야옹이', 4);
 ```
-4. 모듈  
-    모듈은 하나의 파일이다. 해당 모듈은 자신만의 `scope`단위를 가지고 있으며  
+4. 모듈   
+    - 모듈은 하나의 파일이다. 해당 모듈은 자신만의 `scope`단위를 가지고 있으며  
     최상위 `scope`에서 `Window`를 바인딩하지 않는다. 또한 여러 파일에서 호출되는 경우에도  
     단 한번만 파일을 로드한다.
 ```typescript
@@ -128,8 +128,8 @@
     for(let value of gen()) { console.log(value) } //=> 1, 2
 ```
 
-6. Promise와 async/await
-    `Promise`는 동기 방식으로 코딩할 때 `콜백 지옥`이 나오는 것을 해결하기 위해 등장하였다.
+6. Promise와 async/await  
+    - `Promise`는 동기 방식으로 코딩할 때 `콜백 지옥`이 나오는 것을 해결하기 위해 등장하였다.
 ```typescript
     // call-back Hell...
     // loadScript 라는 비동기 스크립트 로드 함수가 있다고 가정하자
@@ -167,21 +167,21 @@
 ```
 
 **타입스크립트 고유 문법**
-1. 타입 주석과 타입 추론
+1. 타입 주석과 타입 추론  
 ```typescript
     let n : number = 1; // (타입 주석) ":"를 기준으로 타입 설정
     let n = 1; // (타입 추론) Input 값을 분석해 왼쪽 타입을 지정
     // 타입 추론은 JS와 호환을 용이하게 해줌.
 ```
 
-2. Interface
+2. Interface  
 ```typescript
     interface Person {
         name: string,
         age?: number
     }
 ```
-3. Tuple
+3. Tuple  
    - 타입스크립트에는 튜플이라는 타입은 존재하지 않는다.  
    다만 한 배열에 여러 타입의 값이 있으면 튜플이라고 생각한다.
 ```typescript
@@ -190,7 +190,7 @@
  let tuple : [boolean, number, string] = [true, 3, 'a'];
 ```
 
-4. 제네릭 타입  
+4. 제네릭 타입   
    - 제네릭 타입이란 데이터의 타입을 지정 타입으로 일반화한다는 것을 의미한다.
 ```typescript
     class Container<T>{
