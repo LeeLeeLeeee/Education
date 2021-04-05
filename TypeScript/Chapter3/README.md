@@ -37,6 +37,7 @@
 undefined는 하나의 타입으로 모든 타입의 최하위에 존재함  
 따라서 undefined를 호출해도 상위 타입을 상속받는다고 간주하며 오류가 발생하지 않음.
 이런 오류를 방지하기 위해 undefined인지를 판별하는 코드가 추가되어야 함.
+
 ![-](./typeclass.PNG)
 ```typescript
     /* error */
