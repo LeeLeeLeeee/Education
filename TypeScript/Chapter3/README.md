@@ -2,6 +2,11 @@
 
 [메인 화면으로](../)
 
+### 함수와 메서드의 차이
+함수와 메서드를 수학적으로 보았을 때는 `함수`라는 동일한 키워드인 것 같다.  
+하지만 함수는 `독립적`으로 존재하고 메서드는 `종속적`으로 존재한다는 큰 차이가있다.  
+    
+
 ### 함수 선언문
 **기본 함수 선언**  
 ```typescript
@@ -10,6 +15,7 @@
     }
 ```
 **함수 시그니처**  
+- 함수 시그니처 말은 어렵지만 단순히 `타입 요약본`정도로 생각해주면 될 것 같다.
 ```typescript
     /* 기본 구조 */
     (매개변수 타입[,...]) => 반환 타입
@@ -22,7 +28,7 @@
 **type 키워드로 타입 별칭 작성**  
 ```typescript
     /* 기본 구조 */
-    type 새로운 타입 = 기존 타입
+    type 새로운_타입 = 기존_타입
     /* example */
     type stringNumberFunc = (string, number) => void;
     let f: stringNumberFunc = function(a: string, b: number) : void {}
@@ -31,6 +37,7 @@
 undefined는 하나의 타입으로 모든 타입의 최하위에 존재함  
 따라서 undefined를 호출해도 상위 타입을 상속받는다고 간주하며 오류가 발생하지 않음.
 이런 오류를 방지하기 위해 undefined인지를 판별하는 코드가 추가되어야 함.
+![-](./typeclass.PNG)
 ```typescript
     /* error */
     interface INameable {
@@ -166,7 +173,7 @@ undefined는 하나의 타입으로 모든 타입의 최하위에 존재함
 
 **매개변수 기본값**  
 ```typescript
-    (매개변수: 타입 [= 매개변수 기본값])
+    (매개변수: 타입 [= 매개변수 기본값], [...]) : 반환_타입
 ```
 
 **객체를 반환하는 화살표함수**  
@@ -255,7 +262,7 @@ function으로 생성된 함수는 동적으로 작동하기 때문에 `bind, ap
         }
     }
 
-    let calc = new Calculator
+    let calc = new Calculator();
     let result = calc.add(1).add(2).multiply(2).value;
     result // 6 ( (0 + 1 + 2) * 2 )
 ```

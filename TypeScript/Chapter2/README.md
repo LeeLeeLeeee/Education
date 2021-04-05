@@ -29,6 +29,7 @@
         age?: number  //선택
     }
     /* 익명 인터페이스 */
+    /* => 선언하지 않은 인터페이스 */
     let ai: {
         name: string
         age:number
@@ -44,7 +45,9 @@
     /* 기본 구조 */
     class 클래스명 {
         //접근제한자 누락 시 public이 default
-        [privat | protected | public] 속성이름[?]: 속성타입[...]
+        [private | protected | public] 속성이름[?]: 속성타입[...]
+        // private : 클래스 외부에서 접근 불가
+        // protected : 상속 받은 클래스 내부에서 접근 가능
     }
     /* example */
     class Person {
@@ -64,9 +67,48 @@
     /* constructor 축약형 */
     class Person3 {
         constructor(public name: string, public age?: number) {}
-    }
-    
+    }    
 ```
+**Getter/ Setter 메서드**  
+클래스는 기본적으로 `캡슐화`즉 은닉성을 목표로 하며 따라서 많은 변수들을  
+특정 메소드에서만 접근할 수 있게 구성하는 것이 좋으며 이런 메소드를 보통 `getter, setter`라고 표현한다.
+```typescript
+    class Person {
+        // 변수가 private, protected일 경우 변수명 앞에 _를 붙이는 습관이 코드 구성에 좋다.
+        private _name: string;
+        private _changeable: boolean;
+        constructor() { 
+            this._name = ''
+            this._changeable = false
+        }
+
+        set changeable(flag: boolean){
+            this._changeable = flag
+        }
+
+        get name(): string {
+            return this._name;
+        }
+
+        set name(name: string) {
+            //set이 코드 동작에 있어 심각한 문제를 야기할 수 있다면
+            //암호화 모듈과 함께 구성하는 것이 좋다
+            if(this._changeable)
+                this._name = name;
+        }
+    }
+    /* 사용 */
+    const person1 = new Person()
+    person1.name = '이영현'
+    console.log(person1.name)
+    person1.changeable = true
+    person1.name = '김영현'
+    console.log(person1.name)
+    // console => ''
+    // console => 김영현
+```
+
+
 **클래스 & 인터페이스**  
 클래스 구조를 인터페이스 구조에 맞게 작성하게 설정.
 ```typescript
@@ -91,13 +133,14 @@
 **추상 클래스 & 상속**  
 `abstract`키워드를 사용하여 상속받는 클래스에서 해당 속성들을 사용하게 함.  
 `abstract`가 붙은 class는 new로 생성할 수 없음.  
-``
+
 ```typescript
     /* 기본 구조 */
     abstract class 클래스명 {
         abstract 속성이름: 속성타입
         abstract 메서드_이름() {}
     }
+
     /* example */
     abstract class Animal {
         abstract type: string,
@@ -139,6 +182,4 @@
     (<{name: string}>person).name = 'Jack2';
     /* type. 2 */
     (person as {name: string}).name = 'Jack3';
-
-    
 ```

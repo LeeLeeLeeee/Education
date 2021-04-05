@@ -175,6 +175,7 @@
 ```
 
 2. Interface  
+    - 타입의 구조를 나타내며 `?`키워드로 선택 속성, 필수 속성을 선언할 수있다.
 ```typescript
     interface Person {
         name: string,
@@ -183,9 +184,8 @@
 ```
 3. Tuple  
    - 타입스크립트에는 튜플이라는 타입은 존재하지 않는다.  
-   다만 한 배열에 여러 타입의 값이 있으면 튜플이라고 생각한다.
+   다만 한 배열에 여러 타입의 값이 있으면 튜플이라고 표현한다.
 ```typescript
- //배열과 비슷하며 한 배열안에 동일한 타입이 있으면 배열, 여러 타입이 있으면 튜플이다.
  let arr : number[] = [1, 2, 3]; // Array
  let tuple : [boolean, number, string] = [true, 3, 'a'];
 ```
