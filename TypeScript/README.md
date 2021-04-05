@@ -1,7 +1,7 @@
 # TYPESCRIPT 📜
 
 ## Typescript 참고 및 실행 사이트
-[🏷 코드 예제](https://drive.google.com/file/d/11zwjfjmZCWeBhirOJj7OG6ns7BMzw5Ni/view)
+[🏷 코드 예제](https://drive.google.com/file/d/11zwjfjmZCWeBhirOJj7OG6ns7BMzw5Ni/view)  
 [코드 테스트](https://www.typescriptlang.org/play?#code/Q)
 
 ## Typescript란?
@@ -104,6 +104,7 @@ import, export
 [4.배열과 튜플](./Chapter4)  
 [5.반복기와 생성기](./Chapter5)  
 [6.비동기 API](./Chapter6)  
-[7.함수 조합의 원리와 응용](./Chapter7)
-[8.람다 라이브러리](./Chapter8)
-[9.제네릭 프로그래밍](./Chapter9)
+[7.함수 조합의 원리와 응용](./Chapter7)  
+[8.람다 라이브러리](./Chapter8)  
+[9.제네릭 프로그래밍](./Chapter9)  
+[10.모나드](./Chapter10)   
