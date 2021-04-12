@@ -96,10 +96,6 @@
     class Cat extends Animal {
         say() { return '야옹' }
     }
-    /* 
-        ES6에서는 extends 키워드를 사용하나
-        TS에서는 implements 키워드를 사용하니 주의하자.
-     */
     new Cat('야옹이', 4);
 ```
 4. 모듈   

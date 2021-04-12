@@ -33,28 +33,7 @@
     type stringNumberFunc = (string, number) => void;
     let f: stringNumberFunc = function(a: string, b: number) : void {}
 ```
-**undefined 관련 주의 사항**  
-undefined는 하나의 타입으로 모든 타입의 최하위에 존재함  
-따라서 undefined를 호출해도 상위 타입을 상속받는다고 간주하며 오류가 발생하지 않음.
-이런 오류를 방지하기 위해 undefined인지를 판별하는 코드가 추가되어야 함.
 
-![-](./typeclass.PNG)
-```typescript
-    /* error */
-    interface INameable {
-        name: string
-    }
-    function getName(o: INameable) { return o.name }
-
-    /* 
-        타입에서 걸려야하지만 자식 타입이라고 판단하며 받아드림.
-        그리고 undefined.name 구문을 실행하기 때문에 에러 발생
-    */
-    let n = getName(undefined)
-    /* errro fix */
-    function getName(o: INameable) { return o === undefined ? 'unknown' : o.name }
-    let n_fix = getName(undefined)
-```
 **선택적 매개변수**  
 ```typescript
     /* 기본구조 */
@@ -237,6 +216,7 @@ function으로 생성된 함수는 동적으로 작동하기 때문에 `bind, ap
     let a : A = new A(2);
     a.method() // value : 2
 ```
+
 **정적 메서드**  
 ```typescript
     export class A {
