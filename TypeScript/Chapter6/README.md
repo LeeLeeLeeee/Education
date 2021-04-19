@@ -93,7 +93,7 @@ then 반환 값이 Promise면 해당 Promise를 수행한 값을 반환 함.
 
 ```
 
-**Promise.all 메서드**  
+**Promise.race 메서드**  
 한`Array`에 담긴 `Promise`중에서 가장 먼저 완료된 상태로 `Promise 상태`를 반환
 `Array.some`의 역할과 비슷
 ```typescript
