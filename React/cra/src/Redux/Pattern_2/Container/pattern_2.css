@@ -1,0 +1,21 @@
+.filter-btn{
+    transition: .5s;
+    border-radius: .5rem;
+    cursor: pointer;
+    text-align: center;
+    width:33%;
+    border:1px solid rgb(191, 191, 191);
+    font-size: 12px;
+    margin:3px;
+    padding: .2rem;
+}
+
+.filter-btn.active {
+    background-color:rgb(89, 89, 191);
+    color: whitesmoke;
+}
+
+.filter-btn:hover {
+    background-color:rgb(89, 89, 191);
+    color: whitesmoke;
+}

@@ -1,5 +1,5 @@
 export const typeInterface = {
     ALL : 'all',
-    COMPLETE: 'completed',
+    COMPLETE: 'complete',
     INCOMPLETE: 'incomplete'
 }

@@ -9,28 +9,8 @@ export const deletePerson = createAction(DELETE_PERSON, name => name)
 
 const initialState = [];
 
-/* 
-return {
-        ...state,
-        allIds: [
-            ...state.allIds, 
-            param.id
-        ],
-        byPerson: {
-            ...state.byPerson,
-            [param.person]: state.byPerson[param.person] // 등록된 사람이 있다면.
-                ? state.byPerson[param.person].concat([param])
-                : [param]
-        },
-        byIds: {
-            ...state.byIds,
-            [param.id]: param
-        }
-};
-*/
-
 export default function(state = initialState, action){
-    const { name } = action.payload || { name : false };
+    const name = action.payload || '';
     switch(action.type){
         case ADD_PERSON:
             return [...state, name]
