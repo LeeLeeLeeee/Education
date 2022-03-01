@@ -1,5 +1,7 @@
 # Education Index 📑
 
+공부한 내용 따로 정리한 Repo
+
 ### React Edu
 [Go to React](./React)
 
